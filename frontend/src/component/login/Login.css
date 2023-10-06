@@ -1,0 +1,80 @@
+@import "../variables/Variables.css";
+.loginCotainer {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.loginBox {
+  width: 420px;
+  border-radius: 4px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 3;
+}
+
+.loginBox > input {
+  width: 100%;
+  border: none;
+  outline: none;
+  border-bottom: 1.5px solid rgb(220, 220, 220);
+  border-bottom: 1px solid snow;
+  padding: 15px 0;
+  margin: 0px 0px;
+  background-color: white;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  padding-left: 35px;
+  font-family: "Open Sans", sans-serif;
+}
+.loginBox > button {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 7px 0;
+  background-color: transparent;
+  color: var(--signature-color);
+  border-radius: 4px;
+  margin: 15px 0;
+  font-size: 1rem;
+  font-weight: bold;
+  width: 80px;
+  transition: all 0.3s ease-in-out;
+  border: 1px solid var(--signature-color);
+  background-color: white;
+}
+.loginBox > button:hover {
+  background-color: var(--signature-color);
+  color: white;
+  cursor: pointer;
+}
+
+.createAccount {
+  margin: 5px;
+  color: red;
+}
+
+/* mail and passsword svg */
+.login-mailSvg {
+  position: absolute;
+  left: 25px;
+  top: 75px;
+  font-size: 20px !important;
+  color: var(--signature-color);
+}
+
+.login-passwordSvg {
+  position: absolute;
+  left: 25px;
+  top: 124px;
+  font-size: 20px !important;
+  color: var(--signature-color);
+}

@@ -1,0 +1,146 @@
+@import "../variables/Variables.css";
+.signupContainer {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.signupBox {
+  width: 420px;
+  border-radius: 4px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 3;
+}
+
+.signupBox > input {
+  width: 100%;
+  border: none;
+  outline: none;
+  border-bottom: 1.5px solid rgb(220, 220, 220);
+  border-bottom: 1px solid snow;
+  padding: 15px 0;
+  margin: 0px 0px;
+  background-color: white;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  padding-left: 35px;
+  font-family: "Open Sans", sans-serif;
+}
+.signupBox > button {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 7px 0;
+  background-color: transparent;
+  color: var(--signature-color);
+  border-radius: 4px;
+  margin: 15px 0;
+  font-size: 1rem;
+  font-weight: bold;
+  width: 100px;
+  transition: all 0.3s ease-in-out;
+  border: 1px solid var(--signature-color);
+  background-color: white;
+}
+.signupBox > button:hover {
+  background-color: var(--signature-color);
+  color: white;
+  cursor: pointer;
+}
+
+.createAccount {
+  margin: 5px;
+  color: red;
+}
+
+/* mail and passsword svg */
+
+.signupBox > svg {
+  position: absolute;
+  left: 25px;
+  font-size: 20px !important;
+  color: var(--signature-color);
+}
+.coPresentIcon {
+  top: 73px !important;
+}
+.mailSvg {
+  top: 124px !important;
+}
+
+.passwordSvg {
+  top: 173px !important;
+}
+.pinIcon {
+  top: 223px !important;
+}
+.imageRoundedIcon {
+  top: 276px !important;
+  z-index: 4;
+}
+.addProfie {
+  position: absolute;
+  left: 20px;
+  top: 259px !important;
+  z-index: 2;
+  background: white;
+  width: 90.5%;
+  border-bottom: 1px solid snow;
+  padding: 15px 36px;
+  margin: 0px 0px;
+  background-color: white;
+  color: gray;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-family: "Open Sans", sans-serif;
+}
+
+.custom-file-upload {
+  opacity: 0;
+}
+#fileUpload {
+  color: transparent;
+  background-color: transparent;
+  cursor: pointer;
+  z-index: 3;
+}
+input[type="file"]::-webkit-file-upload-button {
+  display: none;
+}
+.preview-image {
+  height: 52px;
+  width: 52px;
+  position: absolute;
+  top: 261px;
+  right: 22px;
+  border: 1px solid tomato;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  overflow: hidden;
+}
+.preview-image > img {
+  width: 100%;
+}
+
+@media screen and (max-width: 450px) {
+  .signupBox {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 450px) {
+  .addProfie {
+    width: 89%;
+  }
+}

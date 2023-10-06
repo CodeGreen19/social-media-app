@@ -1,0 +1,112 @@
+@import "../variables/Variables.css";
+.createPostBox {
+  width: 30%;
+  background-color: snow;
+  border-radius: 6px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.createBoxText {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.postImgBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  width: 100%;
+}
+.postImgBox > button {
+  outline: none;
+  border: 1px solid rgba(255, 160, 71, 0.282);
+  background-color: transparent;
+  color: var(--signature-color);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "AR One Sans", sans-serif;
+  margin: 3px;
+
+  background-color: white;
+}
+.postImgBox > button > svg {
+  font-size: 1rem;
+  margin-right: 5px;
+}
+
+.createPostBox > textarea {
+  width: 100%;
+  border: 1px solid rgba(255, 160, 71, 0.282);
+  padding: 10px;
+  outline: none;
+  border-radius: 6px;
+  outline: none;
+  background-color: white;
+  resize: none;
+  margin-top: 5px;
+  font-family: "AR One Sans", sans-serif;
+}
+.createPostBox > textarea::-webkit-scrollbar {
+  display: none;
+}
+
+.postButton {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 7px 0;
+  background-color: transparent;
+  color: var(--signature-color);
+  border-radius: 4px;
+  margin: 15px 0;
+  font-size: 1rem;
+  font-weight: bold;
+  width: 80px;
+  transition: all 0.3s ease-in-out;
+  border: 1px solid rgba(255, 160, 71, 0.282);
+  background-color: white;
+  align-self: flex-end;
+  font-family: "AR One Sans", sans-serif;
+}
+.postButton:hover {
+  background-color: var(--signature-color);
+  color: white;
+  cursor: pointer;
+}
+
+.postImgPreviewBox {
+  width: 100%;
+  max-height: 440px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+@media screen and (max-width: 1200px) {
+  .createPostBox {
+    width: 55%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .createPostBox {
+    width: 95%;
+  }
+  .postImgPreviewBox {
+    width: 100%;
+    max-height: 340px;
+  }
+}

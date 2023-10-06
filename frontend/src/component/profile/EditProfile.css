@@ -1,0 +1,138 @@
+@import "../variables/Variables.css";
+.editProfileContainer {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.editProfileBox {
+  width: 420px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  align-items: center !important;
+}
+
+.editProfileBox > .boxTextBox {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin: 5px 0;
+  margin-top: 20px;
+}
+
+.editProfileImgBox {
+  width: 150px;
+  height: 150px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--signature-color);
+  position: relative;
+  margin-bottom: 10px;
+}
+.editProfileImgBox > img {
+  width: 100%;
+}
+.editProfileImgBox > svg {
+  position: absolute;
+  bottom: 0;
+  right: 0px;
+  color: var(--signature-color);
+  background-color: white;
+  border-radius: 4px;
+  padding: 2px;
+}
+.editProfileBox > span,
+.editProfileBox > span > span {
+  width: 85%;
+  position: relative;
+}
+
+.editProfileBox > span > input,
+.editProfileBox > span > span > input {
+  width: 100%;
+  border: none;
+  outline: none;
+  border-bottom: 1.5px solid rgb(220, 220, 220);
+  border-bottom: 1px solid snow;
+  padding: 10px 0;
+  margin: 0px 0px;
+  background-color: white;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  padding-left: 40px;
+  font-family: "Open Sans", sans-serif;
+}
+.editProfileBox > span > span > input::placeholder {
+  font-size: 0.7rem;
+}
+.editProfileBox > span > svg,
+.editProfileBox > span > span > svg {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  font-size: 20px !important;
+  color: var(--signature-color);
+}
+.editProfileBox > span > span > svg {
+  top: 2px;
+}
+
+.profileUpdate {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 7px 0;
+  background-color: transparent;
+  color: var(--signature-color);
+  border-radius: 4px;
+  margin: 15px 0;
+  font-size: 1rem;
+  font-weight: bold;
+  width: 80px;
+  transition: all 0.3s ease-in-out;
+  border: 1px solid var(--signature-color);
+  background-color: white;
+}
+.profileUpdate:hover {
+  background-color: var(--signature-color);
+  color: white;
+  cursor: pointer;
+}
+
+/* logout design */
+.logoutBox {
+  width: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border-radius: 6px;
+}
+.logoutBox > .boxStyledText {
+  margin: 1px;
+}
+.logoutBox > svg {
+  font-size: 20px !important;
+  color: var(--signature-color);
+  cursor: pointer;
+}
+@media screen and (max-width: 500px) {
+  .editProfileBox {
+    width: 100%;
+  }
+  .logoutBox {
+    width: 100%;
+  }
+  .editProfileBox > span,
+  .editProfileBox > span > span {
+    width: 90%;
+    position: relative;
+  }
+}

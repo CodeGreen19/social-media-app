@@ -1,0 +1,130 @@
+@import "../variables/Variables.css";
+
+.profileContainer {
+  width: 23%;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 80px;
+  max-height: 300px;
+}
+.profileBox {
+  width: 100%;
+  height: 300px;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+}
+.profileText {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 15px;
+}
+.profileText li {
+  padding: 0 8px;
+  margin: 1px;
+  color: white;
+  background-color: var(--signature-color);
+  border-radius: 3px;
+  font-weight: bold;
+}
+.profileImgBox {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 0px;
+  position: relative;
+}
+.profileImgBox > .profileImg {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  margin-right: 10px;
+  border: 1px solid rgb(255, 183, 116);
+  overflow: hidden;
+}
+.profileImgBox > .profileImg > img {
+  width: 100%;
+}
+
+.profileInfo .name {
+  font-size: 1.2rem;
+}
+.profileInfo .editProfile {
+  position: absolute;
+  right: 0;
+  top: 44px;
+  outline: none;
+  border: none;
+  padding: 4px;
+  background-color: var(--signature-color);
+  color: white;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Open Sans", sans-serif;
+  cursor: pointer;
+}
+.profileInfo .editProfile > svg {
+  font-size: 1.1rem;
+}
+.profileInfo .joinedOn {
+  font-size: 0.7rem;
+  color: gray;
+}
+.profileInfo .emailAddress {
+  font-size: 0.7rem;
+  color: gray;
+}
+.follow .following,
+.follow .followers,
+.follow .posts {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 5px 0px;
+  color: rgb(46, 46, 46);
+}
+.follow .following > svg,
+.follow .followers > svg,
+.follow .posts > svg {
+  color: var(--signature-color);
+}
+
+.follow .posts > span:nth-child(1) {
+  margin-right: 27px;
+}
+
+.profileBox > button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  outline: none;
+  padding: 5px 10px;
+  background-color: var(--signature-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Open Sans", sans-serif;
+}
+.profileBox > button > svg {
+  font-size: 1.1rem;
+  margin-left: 3px;
+}
+
+@media screen and (max-width: 1200px) {
+  .profileContainer {
+    min-height: 100vh;
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: top;
+  }
+}

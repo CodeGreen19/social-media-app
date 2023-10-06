@@ -1,0 +1,15 @@
+.friendsContainer {
+  width: 24%;
+  height: 500px;
+  position: sticky;
+  top: 80px;
+  border-radius: 8px;
+
+  padding: 20px;
+}
+
+@media screen and (max-width: 1200px) {
+  .friendsContainer {
+    display: none !important;
+  }
+}

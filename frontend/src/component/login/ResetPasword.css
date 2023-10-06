@@ -1,0 +1,80 @@
+@import "../variables/Variables.css";
+.resetPasswordContainer {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.resetPasswordBox {
+  width: 420px;
+  border-radius: 4px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 3;
+}
+
+.resetPasswordBox > input {
+  width: 100%;
+  border: none;
+  outline: none;
+  border-bottom: 1.5px solid rgb(220, 220, 220);
+  border-bottom: 1px solid snow;
+  padding: 15px 0;
+  margin: 0px 0px;
+  background-color: white;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  padding-left: 35px;
+  font-family: "Open Sans", sans-serif;
+}
+.resetPasswordBox > input::placeholder {
+  font-size: 0.8rem;
+}
+.resetPasswordBox > button {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 7px 0;
+  background-color: transparent;
+  color: var(--signature-color);
+  border-radius: 4px;
+  margin: 15px 0;
+  font-size: 1rem;
+  font-weight: bold;
+  width: 100px;
+  transition: all 0.3s ease-in-out;
+  border: 1px solid var(--signature-color);
+  background-color: white;
+}
+.resetPasswordBox > button:hover {
+  background-color: var(--signature-color);
+  color: white;
+  cursor: pointer;
+}
+
+.createAccount {
+  margin: 5px;
+  color: red;
+}
+.lockSvg1 {
+  position: absolute;
+  left: 25px;
+  top: 75px;
+  font-size: 20px !important;
+  color: var(--signature-color);
+}
+.lockSvg2 {
+  position: absolute;
+  left: 25px;
+  top: 124px;
+  font-size: 20px !important;
+  color: var(--signature-color);
+}

@@ -1,0 +1,33 @@
+.alertContainer {
+  position: fixed;
+  animation: alert 5s infinite;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.alertBox {
+  font-size: 0.85rem;
+  padding: 12px 18px;
+  margin: auto;
+  background-color: white;
+  color: tomato;
+  border-radius: 4px;
+  text-align: center;
+}
+@keyframes alert {
+  0% {
+    top: -50px;
+  }
+  5% {
+    top: 10px;
+  }
+  95% {
+    top: 10px;
+  }
+  100% {
+    top: -50px;
+  }
+}
