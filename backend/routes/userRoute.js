@@ -2,7 +2,6 @@ const express = require("express");
 const {
   registerUser,
   loginUser,
-  FollowAndUnfollow,
   LogoutUser,
   loadUser,
   updateProfile,
@@ -14,7 +13,6 @@ const router = express.Router();
 
 router.route("/register").post(registerUser);
 router.route("/login").post(loginUser);
-router.route("/follow/:id").put(isAuthenticated, FollowAndUnfollow);
 router.route("/logout").get(isAuthenticated, LogoutUser);
 router.route("/me").get(isAuthenticated, loadUser);
 router.route("/profile/update").put(isAuthenticated, updateProfile);

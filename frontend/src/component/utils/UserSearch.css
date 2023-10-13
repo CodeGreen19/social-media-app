@@ -1,0 +1,46 @@
+.userSearchContainer {
+  width: 0%;
+  background-color: transparent;
+  position: fixed;
+  left: 0;
+  top: 79px;
+  height: 100vh;
+  z-index: 30;
+  transition: all 0s 0.5s;
+  overflow: hidden;
+}
+.userSearchContainer.add {
+  width: 35%;
+  transition: unset;
+}
+
+.searchShowBox {
+  width: 65%;
+  height: 70%;
+  background-color: snow;
+  border-radius: 7px;
+  transform: translateY(-100%);
+  transition: all 0.3s;
+  position: relative;
+  margin-left: 28%;
+  margin-right: 1%;
+  outline: 5px solid rgb(239 239 239);
+  overflow: hidden;
+  padding: 15px;
+}
+.searchShowBox.add {
+  transform: translateY(0%);
+  overflow: hidden;
+}
+
+/* to remove modal  */
+
+.searchRemoveIcon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: tomato;
+  font-size: 1.3rem;
+  z-index: 1;
+  cursor: pointer;
+}

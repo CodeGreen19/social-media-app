@@ -15,9 +15,13 @@ app.use(cookieParser());
 // importing routes
 const userRoute = require("./routes/userRoute");
 const postRoute = require("./routes/postRoute");
+const followRoute = require("./routes/followRoute");
+const searchRoute = require("./routes/searchRoute");
 
 // using routes
 app.use("/api/user", userRoute);
-app.use("/api/post", postRoute);
+app.use("/api/user", postRoute);
+app.use("/api/user", followRoute);
+app.use("/api/user", searchRoute);
 
 module.exports = app;

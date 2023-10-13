@@ -1,6 +1,7 @@
 :root {
-  --signature-color: rgb(248, 145, 0);
   --signature-color: rgb(255, 145, 0);
+  --signature-color: #ff9800;
   --main: rgb(241, 136, 0);
+  --main: #f18800;
   /* Define other variables as needed */
 }

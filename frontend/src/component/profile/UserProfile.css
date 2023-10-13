@@ -6,7 +6,7 @@
   flex-direction: column;
   position: sticky;
   top: 80px;
-  max-height: 300px;
+  max-height: 340px;
 }
 .profileBox {
   width: 100%;
@@ -95,7 +95,7 @@
 }
 
 .follow .posts > span:nth-child(1) {
-  margin-right: 27px;
+  margin-right: 30px;
 }
 
 .profileBox > button {
@@ -116,6 +116,24 @@
 .profileBox > button > svg {
   font-size: 1.1rem;
   margin-left: 3px;
+}
+/* logout design */
+.logoutBox {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border-radius: 6px;
+}
+.logoutBox > .boxStyledText {
+  margin: 1px;
+}
+.logoutBox > svg {
+  font-size: 20px !important;
+  color: var(--signature-color);
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1200px) {

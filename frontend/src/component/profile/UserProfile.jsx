@@ -1,21 +1,50 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import "./UserProfile.css";
 import { Dark, ForDarkText, ForLightText, Light } from "../utils/ThemeColor";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import AddIcon from "@mui/icons-material/Add";
 import PageviewIcon from "@mui/icons-material/Pageview";
+import LogoutIcon from "@mui/icons-material/Logout";
 import BoxText from "../utils/BoxText";
 import CreatePost from "./CreatePost";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import TimeAgo from "../utils/TimeAgo";
+import { logoutUser } from "../../action/userAction";
+import Drawer from "../utils/Drawer";
+import { myFollow } from "../../action/followAction";
 function UserProfile() {
   const { user } = useSelector((state) => state.user);
+  const { following, followers } = useSelector((state) => state.follow);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const text = ["P", "R", "O", "F", "I", "L", "E"];
   const DarkMode = false;
   const handleOpen = () => setOpen(true);
+  const logout = ["L", "O", "G", "O", "U", "T"];
+
+  // open drawer
+
+  const [followersOpen, setFollowersOpen] = useState(false);
+  const [followingOpen, setFollowingOpen] = useState(false);
+  // handle following and followers show
+  const handleFolloweShow = (e) => {
+    if (e === "followers") {
+      setFollowersOpen(true);
+      setFollowingOpen(false);
+    } else {
+      setFollowingOpen(true);
+      setFollowersOpen(false);
+    }
+  };
+  // logout handler
+  const handleLogout = () => {
+    dispatch(logoutUser());
+  };
+  useEffect(() => {
+    dispatch(myFollow());
+  }, [dispatch]);
 
   return (
     <Fragment>
@@ -52,12 +81,12 @@ function UserProfile() {
               <div className="followers">
                 <span>followers </span>
                 <span>{user.followers.length}</span>
-                <PageviewIcon />
+                <PageviewIcon onClick={() => handleFolloweShow("followers")} />
               </div>
               <div className="following">
                 <span>following</span>
                 <span>{user.following.length}</span>
-                <PageviewIcon />
+                <PageviewIcon onClick={() => handleFolloweShow("following")} />
               </div>
               <div className="posts">
                 <span>posts</span>
@@ -71,8 +100,26 @@ function UserProfile() {
             </button>
             <CreatePost open={open} setOpen={setOpen} />
           </div>
+          <div className="logoutBox" style={{ backgroundColor: Light }}>
+            <BoxText text={logout} />
+            <LogoutIcon onClick={handleLogout} />
+          </div>
         </div>
       )}
+      {
+        <Drawer
+          Open={followersOpen}
+          setDrawerOpen={setFollowersOpen}
+          follow={followers}
+        />
+      }
+      {
+        <Drawer
+          Open={followingOpen}
+          setDrawerOpen={setFollowingOpen}
+          follow={following}
+        />
+      }
     </Fragment>
   );
 }

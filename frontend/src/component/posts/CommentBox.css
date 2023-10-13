@@ -1,0 +1,132 @@
+.commentBox {
+  background-color: #ebebeb;
+  border-radius: 5px;
+  margin: 5px 0;
+  padding: 10px;
+}
+/* preview image */
+.commentPreviewPost {
+  width: 100%;
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.commentPreviewPost img {
+  width: 100%;
+}
+/* // comment box */
+.commentBox > .commentUserBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+.commentBox > .commentUserBox > .commentUserImgBox {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.commentBox > .commentUserBox > span {
+  position: absolute;
+  left: 32px;
+}
+.commentBox > .commentUserBox > p {
+  font-size: 0.6rem;
+  color: tomato;
+}
+.commentBox .commentUserBox > .commentUserImgBox > img {
+  width: 100%;
+}
+.commentBox .CommentTextBox {
+  font-size: 0.9rem;
+  margin: 5px 0;
+}
+.commentBox > .reactAndRplyBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 50%;
+}
+.commentBox .reactAndRplyBox > .loveReact {
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.commentBox .reactAndRplyBox > .loveReact > svg {
+  font-size: 1.3rem;
+  margin: 0 3px;
+}
+.commentBox .reactAndRplyBox > .replyTextBox {
+  margin-left: 30px;
+}
+
+/* style for send input box */
+
+.commentInputBox {
+  position: sticky;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+  background-color: white;
+  transform: translateY(20px);
+}
+.commentInputBox > input {
+  padding: 10px;
+  border: 1px solid #540d007a;
+  outline: none;
+  border-radius: 50px;
+  background-color: snow;
+  width: 88%;
+  color: rgb(45, 45, 45);
+  letter-spacing: 0.3px;
+  font-family: "AR One Sans", sans-serif;
+}
+.commentInputBox > input::placeholder {
+  color: rgb(45, 45, 45);
+  letter-spacing: 0.3px;
+  font-family: "AR One Sans", sans-serif;
+}
+.commentInputBox > svg {
+  margin-left: 5px;
+  color: tomato;
+}
+
+/* reply commnet  */
+.repliesComment {
+  font-size: 0.7rem;
+}
+
+/* reply text box */
+.replyTextBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* reply input box */
+.replyInputBox {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+.replyInputBox > input {
+  padding: 7px;
+  margin-right: 5px;
+  border: 1px solid rgba(126, 126, 126, 0.4);
+  border-radius: 50px;
+  background-color: white;
+  width: 61%;
+  outline: none;
+  color: rgb(45, 45, 45);
+  letter-spacing: 0.3px;
+  font-family: "AR One Sans", sans-serif;
+  margin: 5px;
+}

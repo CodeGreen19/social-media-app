@@ -70,53 +70,53 @@ export const userReducer = createReducer(initialState, {
 
 export const UpdateProfileReducer = createReducer(initialState, {
   UpdateUserRequest: (state) => {
-    state.updateLoading = true;
+    state.loading = true;
   },
   UpdateUserSuccess: (state, action) => {
-    state.updateLoading = false;
-    state.updateMessage = action.payload.message;
+    state.loading = false;
+    state.message = action.payload.message;
     state.updateUser = action.payload.user;
   },
   UpdateUserFailure: (state, action) => {
-    state.updateLoading = false;
-    state.updateError = action.payload;
+    state.loading = false;
+    state.error = action.payload;
   },
-  clearUpdateErrors: (state) => {
-    state.updateError = null;
+  clearErrors: (state) => {
+    state.error = null;
   },
-  clearUpdateMessage: (state) => {
-    state.updateMessage = null;
+  clearMessage: (state) => {
+    state.message = null;
   },
 });
 
 // update passwrod reducer
 export const UpdatePasswordReducer = createReducer(initialState, {
   ForgetPassRequest: (state) => {
-    state.forgetLoading = true;
+    state.loading = true;
   },
   ForgetPassSuccess: (state, action) => {
-    state.forgetLoading = false;
-    state.forgetMessage = action.payload.message;
+    state.loading = false;
+    state.message = action.payload.message;
   },
   ForgetPassFailure: (state, action) => {
-    state.forgetLoading = false;
-    state.forgetError = action.payload;
+    state.loading = false;
+    state.error = action.payload;
   },
   ResetPassRequest: (state) => {
-    state.forgetLoading = true;
+    state.loading = true;
   },
   ResetPassSuccess: (state, action) => {
-    state.forgetLoading = false;
-    state.forgetMessage = action.payload.message;
+    state.loading = false;
+    state.message = action.payload.message;
   },
   ResetPassFailure: (state, action) => {
-    state.forgetLoading = false;
-    state.forgetError = action.payload;
+    state.loading = false;
+    state.error = action.payload;
   },
-  clearForgetErrors: (state) => {
-    state.forgetError = null;
+  clearErrors: (state) => {
+    state.error = null;
   },
-  clearForgetMessage: (state) => {
-    state.forgetMessage = null;
+  clearMessage: (state) => {
+    state.eessage = null;
   },
 });

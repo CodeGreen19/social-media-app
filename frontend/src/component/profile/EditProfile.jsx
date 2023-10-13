@@ -10,8 +10,7 @@ import LockIcon from "@mui/icons-material/Lock";
 import PhonelinkLockIcon from "@mui/icons-material/PhonelinkLock";
 import EmailIcon from "@mui/icons-material/Email";
 import { Light } from "../utils/ThemeColor";
-import { updateUser, logoutUser } from "../../action/userAction";
-import LogoutIcon from "@mui/icons-material/Logout";
+import { updateUser } from "../../action/userAction";
 
 function EditProfile() {
   const { user } = useSelector((state) => state.user);
@@ -27,7 +26,6 @@ function EditProfile() {
   // for custom text
   const editText = ["E", "D", "I", "T"];
   const editProfile = ["P", "R", "O", "F", "I", "L", "E"];
-  const logout = ["L", "O", "G", "O", "U", "T"];
 
   const fileInputRef = useRef();
   // handle submission
@@ -61,10 +59,7 @@ function EditProfile() {
       reader.readAsDataURL(file);
     }
   };
-  // logout handler
-  const handleLogout = () => {
-    dispatch(logoutUser());
-  };
+
   // set existing profile information
   useEffect(() => {
     if (user) {
@@ -166,10 +161,6 @@ function EditProfile() {
             <button className="profileUpdate" onClick={handleUpdate}>
               Update
             </button>
-          </div>
-          <div className="logoutBox" style={{ backgroundColor: Light }}>
-            <BoxText text={logout} />
-            <LogoutIcon onClick={handleLogout} />
           </div>
         </div>
       )}

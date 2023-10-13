@@ -1,100 +1,123 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Posts.css";
+// import "./CommentShow.css";
 import { Dark, ForDarkText, ForLightText, Light } from "../utils/ThemeColor";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import SmsIcon from "@mui/icons-material/Sms";
-import profile from "../../image/aman.jpg";
 import Text from "../utils/Text";
+import { useDispatch, useSelector } from "react-redux";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+
+import {
+  allCommentsPost,
+  deletePost,
+  getMyPosts,
+  likeAndUnlikePost,
+} from "../../action/postAction";
+import TimeAgo from "../utils/TimeAgo";
+import { loadUser } from "../../action/userAction";
+import CommentShow from "./CommentShow";
 
 function Posts() {
-  const [love, setLove] = useState(false);
-  const picture =
-    "https://images.unsplash.com/photo-1512100356356-de1b84283e18?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bWFsZGl2ZXN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60";
-  const picture2 =
-    "https://images.unsplash.com/photo-1543731068-7e0f5beff43a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8bWFsZGl2ZXN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60";
+  const { posts } = useSelector((state) => state.post);
+  const { user } = useSelector((state) => state.user);
 
-  const text =
-    "The component will initially render the first 100 characters of the text, with a see morebutton. When the user clicks the button, the full text will be rendered. The user can then click the see less button to hide the full text againYou can customize the component to suit your needs, such as changing the number of characters that are initially shown, or the text of the buttons. You can also add additional features, such as an animation when the text is toggled";
+  const dispatch = useDispatch();
   const DarkMode = false;
+
+  const [editBox, setEditBox] = useState("");
+  const [openModal, setOpenModal] = useState("");
+
   const Option = {
     backgroundColor: DarkMode ? Dark : Light,
     color: DarkMode ? ForDarkText : ForLightText,
   };
-  const toggleLove = () => {
-    setLove(!love);
+  const toggleLove = (postId) => {
+    dispatch(likeAndUnlikePost(postId)).then(() => dispatch(getMyPosts()));
   };
+  // delete posthandler
+  const deletePostHandler = (post) => {
+    dispatch(deletePost(post._id)).then(() => {
+      dispatch(getMyPosts());
+      dispatch(loadUser());
+    });
+  };
+  // comment show
+  const commentShowHandler = (post) => {
+    dispatch(allCommentsPost(post._id)).then(() => {
+      setOpenModal(post._id);
+    });
+  };
+  const handleClose = () => {
+    setOpenModal("");
+  };
+
+  useEffect(() => {
+    dispatch(getMyPosts());
+  }, [dispatch]);
   return (
     <div className="postsContainer">
-      <div className="postsBox" style={Option}>
-        <div className="postedUserBox">
-          <div className="postedUserImg">
-            <img src={profile} alt="profile" className="userProfileImg" />{" "}
-          </div>
-          <div className="postedUserName">aman dardarwal</div>
-          <div className="postedTime" style={{ fontSize: "13px" }}>
-            4 min ago
-          </div>
-        </div>
-        <Text text={text} />
-        <div className="postedImg">
-          <img src={picture2} alt="postedPicture" />
-        </div>
+      {posts &&
+        posts.map((post) => (
+          <div className="postsBox" style={Option} key={post._id}>
+            <div className="postedUserBox">
+              <div className="postedUserImg">
+                <img
+                  src={post.owner.avatar.url}
+                  alt="profile"
+                  className="userProfileImg"
+                />{" "}
+              </div>
+              <div className="postedUserName">{post.owner.name}</div>
+              <div className="postedTimeAndDeleteBox">
+                <TimeAgo timestamp={post.createdAt} />
+                <MoreVertIcon
+                  onClick={() =>
+                    editBox === post._id ? setEditBox("") : setEditBox(post._id)
+                  }
+                />
+                <ul
+                  className={`postEditBox ${
+                    editBox === post._id ? "editBoxVisible" : ""
+                  }`}
+                >
+                  <li>edit post</li>
+                  <li onClick={() => deletePostHandler(post)}>delete post</li>
+                </ul>
+              </div>
+            </div>
+            <Text text={post.caption} />
+            <div className="postedImg">
+              <img src={post.image.url} alt="postedPicture" />
+            </div>
 
-        <div className="feedBackBox">
-          <span onClick={toggleLove}>
-            {love ? <FavoriteIcon /> : <FavoriteBorderIcon />} 5
-          </span>
-          <span style={{ fontSize: "0.9rem" }}>
-            5 comment <SmsIcon />
-          </span>
-        </div>
-      </div>
-      <div className="postsBox" style={Option}>
-        <div className="postedUserBox">
-          <div className="postedUserImg">
-            <img src={profile} alt="profile" className="userProfileImg" />{" "}
+            <div className="feedBackBox">
+              <span
+                onClick={() => toggleLove(post._id)}
+                style={{ fontSize: "0.8rem" }}
+              >
+                {post.likes.includes(user._id) ? (
+                  <FavoriteIcon sx={{ cursor: "pointer" }} />
+                ) : (
+                  <FavoriteBorderIcon sx={{ cursor: "pointer" }} />
+                )}
+                {post.likes.length}
+              </span>
+              <span
+                style={{ fontSize: "0.75rem" }}
+                onClick={() => commentShowHandler(post)}
+              >
+                {post.comments.length} comment <SmsIcon />
+              </span>
+              {openModal === post._id ? (
+                <CommentShow closeModal={handleClose} post={post} />
+              ) : (
+                ""
+              )}
+            </div>
           </div>
-          <div className="postedUserName">aman dardarwal</div>
-          <div className="postedTime" style={{ fontSize: "13px" }}>
-            4 min ago
-          </div>
-        </div>
-        <Text text={text} />
-
-        <div className="feedBackBox">
-          <span onClick={toggleLove}>
-            {love ? <FavoriteIcon /> : <FavoriteBorderIcon />} 5
-          </span>
-          <span style={{ fontSize: "0.9rem" }}>
-            comment <SmsIcon />
-          </span>
-        </div>
-      </div>
-      <div className="postsBox" style={Option}>
-        <div className="postedUserBox">
-          <div className="postedUserImg">
-            <img src={profile} alt="profile" className="userProfileImg" />{" "}
-          </div>
-          <div className="postedUserName">aman dardarwal</div>
-          <div className="postedTime" style={{ fontSize: "13px" }}>
-            4 min ago
-          </div>
-        </div>
-        <Text text={text} />
-        <div className="postedImg">
-          <img src={picture} alt="postedPicture" />
-        </div>
-
-        <div className="feedBackBox">
-          <span onClick={toggleLove}>
-            {love ? <FavoriteIcon /> : <FavoriteBorderIcon />} 5
-          </span>
-          <span>
-            comment <SmsIcon />
-          </span>
-        </div>
-      </div>
+        ))}
     </div>
   );
 }

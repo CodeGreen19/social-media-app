@@ -4,12 +4,17 @@ import BoxText from "../utils/BoxText";
 import "./CreatePost.css";
 import ImageIcon from "@mui/icons-material/Image";
 import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
+import { useDispatch } from "react-redux";
+import { createPost, getMyPosts } from "../../action/postAction";
+import { loadUser } from "../../action/userAction";
 
 export default function CreatePost({ open, setOpen }) {
+  const dispatch = useDispatch();
   const create = ["C", "R", "E", "A", "T", "E"];
   const post = ["P", "O", "S", "T"];
   const fileInputRef = useRef();
   const [uploadImg, setUploadImg] = useState("");
+  const [caption, setCaption] = useState("");
 
   // handle button to change image
   const handleImgClick = () => {
@@ -33,6 +38,17 @@ export default function CreatePost({ open, setOpen }) {
   const handleClose = () => {
     setOpen(false);
   };
+  const postHandler = (e) => {
+    e.preventDefault();
+    const info = {
+      caption,
+      uploadImg,
+    };
+    dispatch(createPost(info)).then(() => {
+      dispatch(getMyPosts());
+      dispatch(loadUser());
+    });
+  };
   return (
     <Modal
       open={open}
@@ -45,6 +61,7 @@ export default function CreatePost({ open, setOpen }) {
         alignItems: "center",
         justifyContent: "center",
         overflow: "scroll",
+        zIndex: 50,
       }}
     >
       <div className="createPostBox">
@@ -71,8 +88,16 @@ export default function CreatePost({ open, setOpen }) {
         ) : (
           ""
         )}
-        <textarea cols="10" rows="2" placeholder="caption here.."></textarea>
-        <button className="postButton">POST</button>
+        <textarea
+          cols="10"
+          rows="2"
+          placeholder="caption here.."
+          value={caption}
+          onChange={(e) => setCaption(e.target.value)}
+        ></textarea>
+        <button className="postButton" onClick={postHandler}>
+          POST
+        </button>
         {/* upload image */}
         <div>
           <input

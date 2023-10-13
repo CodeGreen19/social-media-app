@@ -105,29 +105,8 @@
   cursor: pointer;
 }
 
-/* logout design */
-.logoutBox {
-  width: 420px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 20px;
-  margin-top: 10px;
-  border-radius: 6px;
-}
-.logoutBox > .boxStyledText {
-  margin: 1px;
-}
-.logoutBox > svg {
-  font-size: 20px !important;
-  color: var(--signature-color);
-  cursor: pointer;
-}
 @media screen and (max-width: 500px) {
   .editProfileBox {
-    width: 100%;
-  }
-  .logoutBox {
     width: 100%;
   }
   .editProfileBox > span,

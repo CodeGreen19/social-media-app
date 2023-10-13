@@ -4,6 +4,13 @@ import {
   UpdateProfileReducer,
   userReducer,
 } from "./reducer/userReducer";
+import {
+  LikeReducer,
+  commentReducer,
+  postReducer,
+} from "./reducer/postReducer";
+import { followReducer } from "./reducer/followReducer";
+import { searchReducer } from "./reducer/searchReducer";
 // import {
 //   allUsersReducer,
 //   postOfFollowingReducer,
@@ -18,6 +25,11 @@ const store = configureStore({
     user: userReducer,
     updateUser: UpdateProfileReducer,
     updatePassword: UpdatePasswordReducer,
+    post: postReducer,
+    follow: followReducer,
+    react: LikeReducer,
+    comments: commentReducer,
+    search: searchReducer,
     //   postOfFollowing: postOfFollowingReducer,
     //   allUsers: allUsersReducer,
     //   like: likeReducer,

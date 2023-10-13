@@ -1,0 +1,83 @@
+@import "../variables/Variables.css";
+.customDrawerContainer {
+  position: fixed;
+  width: 0%;
+  height: 85vh;
+  right: 0;
+  top: 0;
+  display: flex;
+  justify-content: flex-end;
+  z-index: 100;
+  transition: all 0s 0.4s;
+  overflow: hidden;
+  top: 80px;
+  z-index: 10;
+}
+.customDrawerContainer.add {
+  width: 28%;
+  transition: none;
+}
+
+.drawerBox {
+  height: 100%;
+  width: 85%;
+  transform: translateX(100%);
+  background-color: snow;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  outline: 8px solid rgb(239 239 239);
+  border-radius: 8px;
+  padding: 15px;
+  padding-right: 25px;
+  box-sizing: border-box;
+}
+.drawerBox.add {
+  transform: translateX(-17%);
+  transition: all 0.5s ease-in-out;
+}
+
+.searchFollow {
+  height: 40px;
+  width: 80%;
+  border-radius: 50px;
+  border: 1px solid rgba(254, 101, 74, 0.553);
+  background-color: white;
+  overflow: hidden;
+  position: relative;
+  margin: 15px 0;
+}
+.searchFollow > input {
+  height: 100%;
+  width: 95%;
+  border: none;
+  outline: none;
+  font-size: 0.9rem;
+  background-color: white;
+  padding: 5px;
+  padding-left: 35px !important;
+  color: rgb(45, 45, 45);
+  letter-spacing: 0.3px;
+  font-family: "AR One Sans", sans-serif;
+}
+.searchFollow > svg {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  color: var(--signature-color);
+  font-size: 1.5rem;
+}
+
+.crossDrawer {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  margin: 0;
+  padding: 0;
+}
+.crossDrawer > svg {
+  background-color: white;
+  color: rgba(255, 117, 93, 0.949);
+  border-radius: 6px;
+  margin: 5px;
+  cursor: pointer;
+}

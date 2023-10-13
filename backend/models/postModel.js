@@ -10,6 +10,7 @@ const postSchema = new mongoose.Schema({
 
   owner: {
     type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
   },
 
   createdAt: {
@@ -19,6 +20,7 @@ const postSchema = new mongoose.Schema({
   likes: [
     {
       type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
   ],
 
@@ -26,11 +28,36 @@ const postSchema = new mongoose.Schema({
     {
       user: {
         type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
       },
       comment: {
         type: String,
         required: true,
       },
+      likes: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User",
+        },
+      ],
+      replies: [
+        {
+          user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+          },
+          comment: {
+            type: String,
+            required: true,
+          },
+          likes: [
+            {
+              type: mongoose.Schema.Types.ObjectId,
+              ref: "User",
+            },
+          ],
+        },
+      ],
     },
   ],
 });

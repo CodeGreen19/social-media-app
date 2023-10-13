@@ -1,21 +1,24 @@
 import React from "react";
-import profile from "../../image/bala.jpeg";
 
-function UserBox({ follow }) {
+function UserBox({ myFollowing, unfollowing }) {
   return (
     <div className="userProfileMainBox">
       <div className="userProfileBox">
         <div className="imgBox">
-          <img src={profile} alt="profile" className="userProfileImg" />{" "}
+          <img
+            src={myFollowing.avatar.url}
+            alt="profile"
+            className="userProfileImg"
+          />{" "}
         </div>
         <div className="userProfileInfo">
-          <div className="name">aman dardarwal</div>
+          <div className="name">{myFollowing.name}</div>
         </div>
       </div>
-      {follow ? (
-        <button className="userFollowing">following</button>
-      ) : (
+      {unfollowing ? (
         <button className="userFollow">follow</button>
+      ) : (
+        <button className="userFollowing">following</button>
       )}
     </div>
   );
