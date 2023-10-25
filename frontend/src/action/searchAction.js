@@ -6,7 +6,7 @@ const config = {
   },
 };
 
-// to register a new user
+//to search any existing users
 
 export const searchUsersAction = (givenName) => async (dispatch) => {
   try {

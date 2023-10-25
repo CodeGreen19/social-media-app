@@ -14,6 +14,10 @@
   flex-direction: column;
   justify-content: top;
   align-items: center !important;
+  background-color: #f3f3f3;
+}
+.darkMode .editProfileBox {
+  background-color: rgb(63, 63, 63);
 }
 
 .editProfileBox > .boxTextBox {
@@ -68,6 +72,13 @@
   padding-left: 40px;
   font-family: "Open Sans", sans-serif;
 }
+
+.darkMode .editProfileBox > span > input,
+.darkMode .editProfileBox > span > span > input {
+  border-bottom: 1px solid rgb(0, 0, 0);
+  background-color: rgb(40, 40, 40);
+  color: white;
+}
 .editProfileBox > span > span > input::placeholder {
   font-size: 0.7rem;
 }
@@ -81,6 +92,10 @@
 }
 .editProfileBox > span > span > svg {
   top: 2px;
+}
+.darkMode .editProfileBox > span > svg,
+.darkMode .editProfileBox > span > span > svg {
+  color: rgb(229, 227, 227);
 }
 
 .profileUpdate {
@@ -98,6 +113,10 @@
   transition: all 0.3s ease-in-out;
   border: 1px solid var(--signature-color);
   background-color: white;
+}
+.darkMode .profileUpdate {
+  background-color: var(--signature-color);
+  color: white;
 }
 .profileUpdate:hover {
   background-color: var(--signature-color);

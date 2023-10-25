@@ -3,6 +3,10 @@
   border-radius: 5px;
   margin: 5px 0;
   padding: 10px;
+  position: relative;
+}
+.darkMode .commentBox {
+  background-color: rgb(42, 42, 42);
 }
 /* preview image */
 .commentPreviewPost {
@@ -35,6 +39,12 @@
 }
 .commentBox > .commentUserBox > p {
   font-size: 0.6rem;
+  color: rgb(85, 85, 85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.commentBox > .commentUserBox > p > svg {
   color: tomato;
 }
 .commentBox .commentUserBox > .commentUserImgBox > img {
@@ -79,10 +89,10 @@
 }
 .commentInputBox > input {
   padding: 10px;
-  border: 1px solid #540d007a;
+  border: 1px solid #43434336;
   outline: none;
   border-radius: 50px;
-  background-color: snow;
+  background-color: rgb(241 241 241);
   width: 88%;
   color: rgb(45, 45, 45);
   letter-spacing: 0.3px;
@@ -95,9 +105,22 @@
 }
 .commentInputBox > svg {
   margin-left: 5px;
-  color: tomato;
+  color: rgb(59, 59, 59);
 }
 
+.darkMode .commentInputBox {
+  background-color: rgb(33, 33, 33);
+}
+.darkMode .commentInputBox > input {
+  background-color: rgb(43, 43, 43);
+  color: white;
+}
+.darkMode .commentInputBox > input::placeholder {
+  color: rgb(241, 241, 241);
+}
+.darkMode .commentInputBox > svg {
+  color: rgb(221, 221, 221);
+}
 /* reply commnet  */
 .repliesComment {
   font-size: 0.7rem;
@@ -129,4 +152,48 @@
   letter-spacing: 0.3px;
   font-family: "AR One Sans", sans-serif;
   margin: 5px;
+}
+
+.darkMode .replyInputBox > input {
+  background-color: rgb(50 50 50);
+  color: white;
+}
+.darkMode .replyInputBox > input::placeholder {
+  color: rgb(241, 241, 241);
+}
+.darkMode .replyInputBox > svg {
+  color: rgb(221, 221, 221);
+}
+/* edit comment box  */
+.editCommentUl {
+  height: 58px;
+  width: 92px;
+  background-color: white;
+  position: absolute;
+  right: 0px;
+  top: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  border-radius: 5px;
+  border: 1px solid #c9c9c9;
+}
+.editCommentUl > li {
+  list-style: none;
+  font-size: 0.8rem;
+}
+
+@media screen and (max-width: 700px) {
+  .commentPreviewPost {
+    width: 104%;
+    transform: translateX(-5px);
+    border-radius: unset;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+  }
 }

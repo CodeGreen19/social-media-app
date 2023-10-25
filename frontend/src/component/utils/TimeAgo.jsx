@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const TimeAgo = ({ timestamp }) => {
   const [timeAgo, setTimeAgo] = useState("");
+  const { darkMode } = useSelector((state) => state.user);
 
   useEffect(() => {
     const getTimeAgo = () => {
@@ -16,7 +18,11 @@ const TimeAgo = ({ timestamp }) => {
       ); // Approximate months
 
       if (minutesAgo < 60) {
-        setTimeAgo(`${minutesAgo} minutes ago`);
+        if (minutesAgo < 1) {
+          setTimeAgo("just now");
+        } else {
+          setTimeAgo(`${minutesAgo} min ago`);
+        }
       } else if (hoursAgo < 24) {
         setTimeAgo(`${hoursAgo} hours ago`);
       } else if (daysAgo < 30) {
@@ -34,7 +40,7 @@ const TimeAgo = ({ timestamp }) => {
     return () => clearInterval(intervalId);
   }, [timestamp]);
 
-  return <span>{timeAgo}</span>;
+  return <span style={{ color: darkMode && "white" }}>{timeAgo}</span>;
 };
 
 export default TimeAgo;

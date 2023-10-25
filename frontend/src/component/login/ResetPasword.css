@@ -67,14 +67,14 @@
 .lockSvg1 {
   position: absolute;
   left: 25px;
-  top: 75px;
+  top: 80px;
   font-size: 20px !important;
   color: var(--signature-color);
 }
 .lockSvg2 {
   position: absolute;
   left: 25px;
-  top: 124px;
+  top: 130px;
   font-size: 20px !important;
   color: var(--signature-color);
 }

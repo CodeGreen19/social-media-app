@@ -7,6 +7,10 @@ const postSchema = new mongoose.Schema({
     public_id: String,
     url: String,
   },
+  video: {
+    public_id: String,
+    url: String,
+  },
 
   owner: {
     type: mongoose.Schema.Types.ObjectId,
@@ -23,6 +27,12 @@ const postSchema = new mongoose.Schema({
       ref: "User",
     },
   ],
+  reports: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 
   comments: [
     {
@@ -34,6 +44,7 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
+      commentAt: { type: Date },
       likes: [
         {
           type: mongoose.Schema.Types.ObjectId,
@@ -50,6 +61,11 @@ const postSchema = new mongoose.Schema({
             type: String,
             required: true,
           },
+          replyTo: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+          },
+          replyAt: { type: Date },
           likes: [
             {
               type: mongoose.Schema.Types.ObjectId,

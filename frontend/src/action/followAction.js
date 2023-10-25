@@ -8,13 +8,17 @@ const config = {
 
 // to fetch followinga and followers
 
-export const myFollow = () => async (dispatch) => {
+export const myFollow = (selectId) => async (dispatch) => {
   try {
     dispatch({
       type: "FollowRequest",
     });
 
-    const { data } = await axios.get("/api/user/following", config);
+    const { data } = await axios.post(
+      "/api/user/following",
+      { selectId },
+      config
+    );
 
     dispatch({
       type: "FollowSuccess",
@@ -28,13 +32,40 @@ export const myFollow = () => async (dispatch) => {
   }
 };
 
-export const unFollowingUsers = () => async (dispatch) => {
+// to make follow and unfollowing
+
+export const followAndUnFollow = (userId) => async (dispatch) => {
+  try {
+    dispatch({
+      type: "FollowUnfollowRequest",
+    });
+
+    const { data } = await axios.put(`/api/user/follow/${userId}`, config);
+
+    dispatch({
+      type: "FollowUnfollowSuccess",
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: "FollowUnfollowFailure",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+/// suggested them who are not following a spacific user
+export const unFollowingUsers = (selectId) => async (dispatch) => {
   try {
     dispatch({
       type: "UnFollowingRequest",
     });
 
-    const { data } = await axios.get("/api/user/suggested", config);
+    const { data } = await axios.post(
+      "/api/user/suggested",
+      { selectId },
+      config
+    );
 
     dispatch({
       type: "UnFollowingSuccess",
@@ -47,4 +78,44 @@ export const unFollowingUsers = () => async (dispatch) => {
     });
   }
 };
-// to
+// to remove follower
+export const removeFollower = (userId) => async (dispatch) => {
+  try {
+    dispatch({
+      type: "RemoveFollowerRequest",
+    });
+
+    const { data } = await axios.put(`/api/user/follower/${userId}`, config);
+
+    dispatch({
+      type: "RemoveFollowerSuccess",
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: "RemoveFollowerFailure",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+// to get followings posts
+export const getFollowingPosts = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: "GetFollowingPostRequest",
+    });
+
+    const { data } = await axios.get(`/api/user/getposts`, config);
+
+    dispatch({
+      type: "GetFollowingPostSuccess",
+      payload: data.posts,
+    });
+  } catch (error) {
+    dispatch({
+      type: "GetFollowingPostFailure",
+      payload: error.response.data.message,
+    });
+  }
+};

@@ -1,10 +1,9 @@
 .friendsContainer {
   width: 24%;
-  height: 515px;
+  height: 533px;
   position: sticky;
   top: 80px;
   border-radius: 8px;
-
   padding: 20px;
 }
 

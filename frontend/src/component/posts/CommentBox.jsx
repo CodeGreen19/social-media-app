@@ -1,50 +1,76 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useDispatch, useSelector } from "react-redux";
-import { forRepliedComments, forReplyComment } from "../../action/postAction";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import {
+  allCommentsPost,
+  deletePostComment,
+  forReplyComment,
+  reactComment,
+} from "../../action/postAction";
 import "./CommentBox.css";
 import ReplyBox from "./ReplyBox";
+import TimeAgo from "../utils/TimeAgo";
 
 function CommentBox({ comment, post }) {
-  const { replyCommentsInfo } = useSelector((state) => state.post);
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [reply, setReply] = useState(false);
+  const [modalShow, setModalSow] = useState(false);
   const [replyComment, setReplyComment] = useState("");
+  const [replyToUser, setReplyToUser] = useState("");
   const [showReplies, setShowReplies] = useState(false);
-  const [repliesArr, setRepliesArr] = useState("");
-  const [count, setCount] = useState(0);
-
-  // show replies handler
-  const showReplyHandler = (commentId) => {
-    const info = {
-      commentId,
-    };
-    dispatch(forRepliedComments(post._id, info)).then(() => {
-      setShowReplies(!showReplies);
-      setRepliesArr(replyCommentsInfo);
+  const [reactExistUser, setReactExistUser] = useState(false);
+  // if user allready react a spacific comment
+  const isUserExistsOnReact = () => {
+    if (comment.likes.includes(user._id)) {
+      setReactExistUser(true);
+    } else setReactExistUser(false);
+  };
+  // handle comment likes
+  const handleCommentLike = (commentId) => {
+    // add or remove comment's likes
+    dispatch(reactComment(post._id, commentId)).then(() => {
+      dispatch(allCommentsPost(post._id)).then(() => {
+        setReactExistUser(!reactExistUser);
+      });
     });
-    // console.log(post._id, commentId);
   };
 
-  console.log(repliesArr);
+  // to delete a specific comment
+  const handleDeleteComment = (commentId) => {
+    dispatch(deletePostComment(post._id, commentId)).then(() => {
+      dispatch(allCommentsPost(post._id)).then(() => {
+        setModalSow(!modalShow);
+      });
+    });
+  };
 
+  // toggle replied input box
+  const replyToggleHandler = (commentId) => {
+    setReplyToUser(commentId);
+    setReply(!reply);
+  };
+  // to reply a spacific comment
   const handleReplyComment = () => {
+    setReplyComment("");
     const info = {
       comment: replyComment,
       commentId: comment._id,
+      replyToId: replyToUser,
     };
     dispatch(forReplyComment(post._id, info)).then(() => {
-      setCount(count + 1);
-      const newmodifiedComment = {
-        user,
-        comment: replyComment,
-        _id: count,
-      };
-      setRepliesArr([...repliesArr, newmodifiedComment]);
+      dispatch(allCommentsPost(post._id));
     });
   };
+  console.log("comments", comment);
+
+  useEffect(() => {
+    isUserExistsOnReact();
+    // eslint-disable-next-line
+  }, []);
   return (
     <div className="commentBox">
       <div className="commentUserBox">
@@ -52,19 +78,48 @@ function CommentBox({ comment, post }) {
           <img src={comment.user.avatar.url} alt="commentuser" />
         </div>
         <span>{comment.user.name}</span>
-        <p className="commentTime">2 min ago</p>
+        <p className="commentTime">
+          {comment.commentAt ? (
+            <TimeAgo timestamp={comment.commentAt} />
+          ) : (
+            "just now"
+          )}
+          {comment.user._id === user._id ? (
+            <MoreVertIcon onClick={() => setModalSow(!modalShow)} />
+          ) : (
+            <MoreVertIcon style={{ opacity: 0 }} />
+          )}
+        </p>
+        {modalShow && (
+          <ul className="editCommentUl">
+            <li
+              style={{ color: "tomato" }}
+              onClick={() => handleDeleteComment(comment._id)}
+            >
+              delete
+            </li>
+            <li onClick={() => setModalSow(!modalShow)}>cancel</li>
+          </ul>
+        )}
       </div>
       <div className="CommentTextBox">{comment.comment}</div>
       <div className="reactAndRplyBox">
-        <span className="loveReact">
-          <FavoriteBorderIcon /> 2
+        <span
+          className="loveReact"
+          onClick={() => handleCommentLike(comment._id)}
+        >
+          {reactExistUser ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+          {comment.likes.length}
         </span>
-        <span className="replyTextBox" onClick={() => setReply(!reply)}>
+        <span
+          className="replyTextBox"
+          onClick={() => replyToggleHandler(comment.user._id)}
+        >
           reply
         </span>
         <div
           className="repliesComment"
-          onClick={() => showReplyHandler(comment._id)}
+          onClick={() => setShowReplies(!showReplies)}
         >
           {comment.replies && comment.replies.length > 0
             ? `replies (${comment.replies.length})`
@@ -78,11 +133,16 @@ function CommentBox({ comment, post }) {
             placeholder="reply here...."
             value={replyComment}
             onChange={(e) => setReplyComment(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleReplyComment();
+              }
+            }}
           />{" "}
           <SendRoundedIcon onClick={handleReplyComment} />
         </div>
       )}
-      {showReplies && <ReplyBox repliesArr={repliesArr} />}
+      {showReplies && <ReplyBox comment={comment} post={post} />}
     </div>
   );
 }

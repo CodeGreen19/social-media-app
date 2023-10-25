@@ -1,6 +1,8 @@
-export const Light = "snow";
-export const Dark = "#1e1e1f";
-export const DarkBg = "black";
-export const LightBg = "rgb(239 239 239)";
+// some theme collors might be used
+
+export const Light = "#f9f9f9";
+export const Dark = "#272727";
+export const DarkBg = "rgb(34 34 34)";
+export const LightBg = "white";
 export const ForDarkText = "white";
 export const ForLightText = "black";

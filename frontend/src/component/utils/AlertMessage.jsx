@@ -24,6 +24,11 @@ function AlertMessage() {
   const { loading: showCommentLoading } = useSelector(
     (state) => state.comments
   );
+  const {
+    loading: followLoading,
+    message: followMessage,
+    error: followError,
+  } = useSelector((state) => state.follow);
 
   // these state for showing custom alerts
   const [alert, setAlert] = useState(false);
@@ -46,7 +51,7 @@ function AlertMessage() {
     }
     if (message) {
       handleAlert(message);
-      dispatch({ type: "clearErrors" });
+      dispatch({ type: "clearMessage" });
     }
     //  message showing
     if (updateError) {
@@ -73,6 +78,14 @@ function AlertMessage() {
       handleAlert(postMessage);
       dispatch({ type: "clearMessage" });
     }
+    if (followError) {
+      handleAlert(followError);
+      dispatch({ type: "clearErrors" });
+    }
+    if (followMessage) {
+      handleAlert(followMessage);
+      dispatch({ type: "clearMessage" });
+    }
   }, [
     error,
     message,
@@ -83,6 +96,8 @@ function AlertMessage() {
     forgetMessage,
     postError,
     postMessage,
+    followError,
+    followMessage,
   ]);
 
   return (
@@ -91,6 +106,7 @@ function AlertMessage() {
       updateLoading ||
       forgetLoading ||
       postLoading ||
+      followLoading ||
       showCommentLoading ? (
         <Loading />
       ) : (

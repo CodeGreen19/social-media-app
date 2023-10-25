@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
-import { LightBg } from "../utils/ThemeColor";
+import { Dark, ForDarkText, ForLightText, Light } from "../utils/ThemeColor";
 import BoxText from "../utils/BoxText";
 import "./EditProfile.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,11 +9,12 @@ import LockOpenIcon from "@mui/icons-material/LockOpen";
 import LockIcon from "@mui/icons-material/Lock";
 import PhonelinkLockIcon from "@mui/icons-material/PhonelinkLock";
 import EmailIcon from "@mui/icons-material/Email";
-import { Light } from "../utils/ThemeColor";
-import { updateUser } from "../../action/userAction";
+import { loadUser, updateUser } from "../../action/userAction";
+import { useNavigate } from "react-router-dom";
 
 function EditProfile() {
-  const { user } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+  const { user, darkMode } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -27,6 +28,10 @@ function EditProfile() {
   const editText = ["E", "D", "I", "T"];
   const editProfile = ["P", "R", "O", "F", "I", "L", "E"];
 
+  const Option = {
+    backgroundColor: darkMode ? Dark : Light,
+    color: darkMode ? ForDarkText : ForLightText,
+  };
   const fileInputRef = useRef();
   // handle submission
   const handleUpdate = () => {
@@ -38,7 +43,10 @@ function EditProfile() {
       confirmPassword,
       profileImg,
     };
-    dispatch(updateUser(updateInfo));
+    dispatch(updateUser(updateInfo)).then(() => {
+      loadUser();
+      navigate("/");
+    });
   };
   // handle button to change image
   const handleButtonClick = () => {
@@ -72,10 +80,10 @@ function EditProfile() {
     <Fragment>
       {user && (
         <div
-          className="editProfileContainer"
-          style={{ backgroundColor: LightBg }}
+          className={`editProfileContainer ${darkMode && "darkMode"}`}
+          style={Option}
         >
-          <div className="editProfileBox" style={{ backgroundColor: Light }}>
+          <div className="editProfileBox">
             <div className="boxTextBox">
               <BoxText text={editText} />
               <BoxText text={editProfile} />

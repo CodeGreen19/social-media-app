@@ -14,6 +14,17 @@ export const followReducer = createReducer(initialState, {
     state.loading = false;
     state.error = action.payload;
   },
+  FollowUnfollowRequest: (state) => {
+    state.loading = true;
+  },
+  FollowUnfollowSuccess: (state, action) => {
+    state.loading = false;
+    state.message = action.payload.message;
+  },
+  FollowUnfollowFailure: (state, action) => {
+    state.loading = false;
+    state.error = action.payload;
+  },
   UnFollowingRequest: (state) => {
     state.loading = true;
   },
@@ -22,6 +33,28 @@ export const followReducer = createReducer(initialState, {
     state.unfollowingUsers = action.payload;
   },
   UnFollowingFailure: (state, action) => {
+    state.loading = false;
+    state.error = action.payload;
+  },
+  RemoveFollowerRequest: (state) => {
+    state.loading = true;
+  },
+  RemoveFollowerSuccess: (state, action) => {
+    state.loading = false;
+    state.message = action.message;
+  },
+  RemoveFollowerFailure: (state, action) => {
+    state.loading = false;
+    state.error = action.payload;
+  },
+  GetFollowingPostRequest: (state) => {
+    state.loading = true;
+  },
+  GetFollowingPostSuccess: (state, action) => {
+    state.loading = false;
+    state.posts = action.payload;
+  },
+  GetFollowingPostFailure: (state, action) => {
     state.loading = false;
     state.error = action.payload;
   },

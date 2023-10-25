@@ -71,20 +71,20 @@
   color: var(--signature-color);
 }
 .coPresentIcon {
-  top: 73px !important;
+  top: 82px !important;
 }
 .mailSvg {
-  top: 124px !important;
+  top: 132px !important;
 }
 
 .passwordSvg {
-  top: 173px !important;
+  top: 180px !important;
 }
 .pinIcon {
-  top: 223px !important;
+  top: 228px !important;
 }
 .imageRoundedIcon {
-  top: 276px !important;
+  top: 274px !important;
   z-index: 4;
 }
 .addProfie {

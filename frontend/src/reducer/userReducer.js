@@ -46,20 +46,39 @@ export const userReducer = createReducer(initialState, {
     state.isAuthenticated = false;
   },
 
-  LogoutUserRequest: (state) => {
+  LogoutRequest: (state) => {
     state.loading = true;
   },
-  LogoutUserSuccess: (state, action) => {
+  LogoutSuccess: (state, action) => {
     state.loading = false;
     state.user = null;
     state.message = action.payload.message;
     state.isAuthenticated = false;
   },
-  LogoutUserFailure: (state, action) => {
+  LogoutFailure: (state, action) => {
     state.loading = false;
     state.error = action.payload;
     state.isAuthenticated = true;
   },
+  SelectUserRequest: (state) => {
+    state.loading = true;
+  },
+  SelectUserSuccess: (state, action) => {
+    state.loading = false;
+    state.selectedUser = action.payload.selectedUser;
+    state.relation = action.payload.relation;
+  },
+  SelectUserFailure: (state, action) => {
+    state.loading = false;
+    state.error = action.payload;
+  },
+  mobileDevice: (state, action) => {
+    state.mobile = action.payload;
+  },
+  toggleDarkMode: (state, action) => {
+    state.darkMode = action.payload;
+  },
+
   clearErrors: (state) => {
     state.error = null;
   },
@@ -93,30 +112,36 @@ export const UpdateProfileReducer = createReducer(initialState, {
 export const UpdatePasswordReducer = createReducer(initialState, {
   ForgetPassRequest: (state) => {
     state.loading = true;
+    state.forget = false;
   },
   ForgetPassSuccess: (state, action) => {
     state.loading = false;
     state.message = action.payload.message;
+    state.forget = true;
   },
   ForgetPassFailure: (state, action) => {
     state.loading = false;
     state.error = action.payload;
+    state.forget = false;
   },
   ResetPassRequest: (state) => {
     state.loading = true;
+    state.updatedPassword = false;
   },
   ResetPassSuccess: (state, action) => {
     state.loading = false;
     state.message = action.payload.message;
+    state.updatedPassword = true;
   },
   ResetPassFailure: (state, action) => {
     state.loading = false;
     state.error = action.payload;
+    state.updatedPassword = false;
   },
   clearErrors: (state) => {
     state.error = null;
   },
   clearMessage: (state) => {
-    state.eessage = null;
+    state.message = null;
   },
 });

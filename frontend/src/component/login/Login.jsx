@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Login.css";
 import BoxText from "../utils/BoxText";
 import { Light, LightBg } from "../utils/ThemeColor";
 import EmailIcon from "@mui/icons-material/Email";
 import HttpsIcon from "@mui/icons-material/Https";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { loginUser } from "../../action/userAction";
 
 function Login() {
+  const { isAuthenticated } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const login = ["L", "O", "G", "I", "N"];
@@ -22,7 +23,11 @@ function Login() {
     e.preventDefault();
     dispatch(loginUser(email, password));
   };
-
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, [isAuthenticated, navigate]);
   return (
     <div className="loginCotainer" style={{ backgroundColor: LightBg }}>
       <form className="loginBox" style={{ backgroundColor: Light }}>

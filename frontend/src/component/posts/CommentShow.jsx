@@ -3,39 +3,35 @@ import "./CommentShow.css";
 import CommentBox from "./CommentBox";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import { useDispatch, useSelector } from "react-redux";
-import { commentPost } from "../../action/postAction";
+import { allCommentsPost, commentPost } from "../../action/postAction";
+import Text from "../utils/Text";
 
 export default function CommentShow({ closeModal, post }) {
   const { comments } = useSelector((state) => state.comments);
-  const { user } = useSelector((state) => state.user);
+  const { mobile, darkMode } = useSelector((state) => state.user);
   const [newComment, setNewComment] = useState("");
-  const [modifiedComment, setModifiedComment] = useState(comments);
-
-  const [count, setCount] = useState(0);
 
   const dispatch = useDispatch();
-  // modified comment
+
   /// send a new comment
+
   const handleComment = () => {
     setNewComment("");
     if (newComment === "") return;
     dispatch(commentPost(post._id, newComment)).then(() => {
-      setCount(count + 1);
-      const newmodifiedComment = {
-        user,
-        comment: newComment,
-        _id: count,
-      };
-      setModifiedComment([...modifiedComment, newmodifiedComment]);
+      dispatch(allCommentsPost(post._id));
     });
   };
+
   return (
-    <div className={`commentMainContainer`}>
+    <div className={`commentMainContainer ${darkMode && "darkMode"}`}>
       <div className="commentContainer">
         <span className="closeIcon" onClick={closeModal}>
-          <CloseRoundedIcon />
+          {mobile ? <KeyboardDoubleArrowLeftIcon /> : <CloseRoundedIcon />}
         </span>
+        {post.caption && <Text text={post.caption} />}
         {post.image?.url ? (
           <div className="commentPreviewPost">
             <img src={post.image.url} alt="commentImage" />
@@ -43,8 +39,15 @@ export default function CommentShow({ closeModal, post }) {
         ) : (
           ""
         )}
+        {post.video?.url ? (
+          <div className="commentPreviewVideo">
+            <video src={post.video.url} alt="commentVideo" />
+          </div>
+        ) : (
+          ""
+        )}
         {comments &&
-          modifiedComment.map((comment) => (
+          comments.map((comment) => (
             <CommentBox comment={comment} key={comment._id} post={post} />
           ))}
         <div className="commentInputBox">
@@ -53,6 +56,11 @@ export default function CommentShow({ closeModal, post }) {
             placeholder="comment here...."
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleComment();
+              }
+            }}
           />{" "}
           <SendRoundedIcon onClick={handleComment} />
         </div>

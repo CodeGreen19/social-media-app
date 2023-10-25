@@ -51,7 +51,7 @@ export const loginUser = (email, password) => async (dispatch) => {
     });
   }
 };
-// to login a registered user
+// logout user
 export const logoutUser = () => async (dispatch) => {
   try {
     dispatch({
@@ -93,7 +93,7 @@ export const loadUser = () => async (dispatch) => {
   }
 };
 
-// to update profile
+// to update profile information
 export const updateUser = (userInfo) => async (dispatch) => {
   try {
     dispatch({
@@ -142,6 +142,8 @@ export const PasswordForget = (email) => async (dispatch) => {
     });
   }
 };
+
+// passwords reset
 export const passwordReset = (token, info) => async (dispatch) => {
   try {
     dispatch({
@@ -161,6 +163,27 @@ export const passwordReset = (token, info) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "ResetPassFailure",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+// selecet a new user to show all over the site
+export const selectUser = (id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: "SelectUserRequest",
+    });
+
+    const { data } = await axios.post(`/api/user/select/user`, { id }, config);
+
+    dispatch({
+      type: "SelectUserSuccess",
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: "SelectUserFailure",
       payload: error.response.data.message,
     });
   }

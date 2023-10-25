@@ -11,10 +11,14 @@
   align-items: flex-start;
   justify-content: center;
   width: 100%;
-  background-color: rgb(198, 198, 198);
+  background-color: rgb(217 217 217);
   padding: 10px;
   border-radius: 6px;
   margin: 3px;
+}
+
+.darkMode .forRepliesBox {
+  background-color: rgb(55 55 55);
 }
 .forRepliesUserBox {
   display: flex;
@@ -34,13 +38,26 @@
   width: 100%;
 }
 .forRepliesUserBox > .forRepliesTime {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 0.6rem;
+  color: rgb(70, 70, 70);
+  position: relative;
+}
+.forRepliesUserBox > .forRepliesTime > svg {
+  font-size: 1.1rem;
   color: tomato;
 }
 
 .replyCommentText {
   font-size: 0.9rem;
   margin: 5px 0;
+}
+.replyCommentText > span {
+  color: tomato;
+  font-size: 0.8rem;
+  margin-right: 10px;
 }
 
 /* commented user name  */
@@ -68,4 +85,43 @@
 .forReactAndReply .replyReply {
   font-size: 0.8rem;
   margin-left: 30px;
+}
+
+/* reply input box */
+.replyToReplyInputBox {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+.replyToReplyInputBox > input {
+  padding: 5px;
+  margin-right: 5px;
+  border: 1px solid rgba(126, 126, 126, 0.4);
+  border-radius: 50px;
+  background-color: white;
+  width: 61%;
+  outline: none;
+  color: rgb(45, 45, 45);
+  letter-spacing: 0.3px;
+  font-family: "AR One Sans", sans-serif;
+  margin: 5px;
+}
+
+/* delete replied comment  */
+.editRepliedComment {
+  height: 55px;
+  width: 75px;
+  position: absolute;
+  right: 0px;
+  top: 20px;
+  background-color: white;
+  border: 1px solid rgba(255, 99, 71, 0.552);
+  border-radius: 3px;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  list-style: none;
 }

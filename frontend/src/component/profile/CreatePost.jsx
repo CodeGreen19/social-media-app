@@ -4,21 +4,39 @@ import BoxText from "../utils/BoxText";
 import "./CreatePost.css";
 import ImageIcon from "@mui/icons-material/Image";
 import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
-import { useDispatch } from "react-redux";
-import { createPost, getMyPosts } from "../../action/postAction";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  createPost,
+  getMyPosts,
+  uploadVideoAction,
+} from "../../action/postAction";
 import { loadUser } from "../../action/userAction";
+import axios from "axios";
+import { videoUploadApi } from "../video/videoUrl";
 
 export default function CreatePost({ open, setOpen }) {
+  const { user, darkMode } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const create = ["C", "R", "E", "A", "T", "E"];
   const post = ["P", "O", "S", "T"];
   const fileInputRef = useRef();
+  const videoFileInputRef = useRef();
   const [uploadImg, setUploadImg] = useState("");
+  const [uploadVideo, setUploadVideo] = useState("");
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [uploadVideoLocal, setUploadVideoLocal] = useState("");
   const [caption, setCaption] = useState("");
 
   // handle button to change image
   const handleImgClick = () => {
+    setUploadVideo("");
+    setUploadVideoLocal("");
     fileInputRef.current.click();
+  };
+  // handle button to change image
+  const handleVideoClick = () => {
+    setUploadImg("");
+    videoFileInputRef.current.click();
   };
 
   // handle image change
@@ -35,6 +53,15 @@ export default function CreatePost({ open, setOpen }) {
       reader.readAsDataURL(file);
     }
   };
+  // to upload a new video
+  const handleChangeVideo = (e) => {
+    const selectedVideo = e.target.files[0];
+    setUploadVideo(selectedVideo);
+    setUploadVideoLocal(URL.createObjectURL(selectedVideo));
+  };
+
+  // to upload a new video
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -45,9 +72,47 @@ export default function CreatePost({ open, setOpen }) {
       uploadImg,
     };
     dispatch(createPost(info)).then(() => {
+      dispatch(getMyPosts(user._id));
+      dispatch({ type: "myPostsTrue", payload: true });
       dispatch(getMyPosts());
       dispatch(loadUser());
+      handleClose();
+      setUploadImg("");
+      setCaption("");
     });
+  };
+
+  // to post video handler
+  const postVideoHandler = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("file", uploadVideo);
+    formData.append("upload_preset", "video_preset");
+
+    const config = {
+      onUploadProgress: (progressEvent) => {
+        const percentCompleted = Math.round(
+          (progressEvent.loaded * 100) / progressEvent.total
+        );
+        setUploadProgress(percentCompleted);
+      },
+    };
+
+    try {
+      const { data } = await axios.post(videoUploadApi, formData, config);
+      const info = {
+        caption,
+        videoUrl: data.secure_url,
+        publicId: data.public_id,
+      };
+      dispatch(uploadVideoAction(info));
+      handleClose();
+      setCaption("");
+      setUploadVideo("");
+      setUploadProgress(0);
+    } catch (error) {
+      console.log("error", error);
+    }
   };
   return (
     <Modal
@@ -64,7 +129,7 @@ export default function CreatePost({ open, setOpen }) {
         zIndex: 50,
       }}
     >
-      <div className="createPostBox">
+      <div className={`createPostBox ${darkMode && "darkMode"}`}>
         <div className="createBoxText">
           <BoxText text={create} />
           <BoxText text={post} />
@@ -73,7 +138,7 @@ export default function CreatePost({ open, setOpen }) {
           <button onClick={handleImgClick}>
             <ImageIcon /> add image
           </button>
-          <button>
+          <button onClick={handleVideoClick}>
             <OndemandVideoIcon /> add video
           </button>
         </div>
@@ -88,6 +153,13 @@ export default function CreatePost({ open, setOpen }) {
         ) : (
           ""
         )}
+        {uploadVideoLocal ? (
+          <div className="videoPreviewBox">
+            <video src={uploadVideoLocal} controls></video>
+          </div>
+        ) : (
+          ""
+        )}
         <textarea
           cols="10"
           rows="2"
@@ -95,9 +167,15 @@ export default function CreatePost({ open, setOpen }) {
           value={caption}
           onChange={(e) => setCaption(e.target.value)}
         ></textarea>
-        <button className="postButton" onClick={postHandler}>
-          POST
-        </button>
+        {uploadVideo ? (
+          <button className="postButton" onClick={postVideoHandler}>
+            {uploadProgress > 0 ? `${uploadProgress} %` : "POST"}
+          </button>
+        ) : (
+          <button className="postButton" onClick={postHandler}>
+            POST
+          </button>
+        )}
         {/* upload image */}
         <div>
           <input
@@ -109,6 +187,17 @@ export default function CreatePost({ open, setOpen }) {
           />
         </div>
         {/* upload image */}
+        {/* upload video */}
+        <div>
+          <input
+            type="file"
+            accept="video/*"
+            ref={videoFileInputRef}
+            onChange={handleChangeVideo}
+            hidden
+          />
+        </div>
+        {/* upload video */}
       </div>
     </Modal>
   );

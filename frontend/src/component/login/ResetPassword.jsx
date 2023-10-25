@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ResetPasword.css";
 import BoxText from "../utils/BoxText";
 import { Light, LightBg } from "../utils/ThemeColor";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import LockIcon from "@mui/icons-material/Lock";
-import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { passwordReset } from "../../action/userAction";
 
 function ResetPassword() {
+  const navigate = useNavigate();
+  const { updatedPassword } = useSelector((state) => state.updatePassword);
   const { token } = useParams();
   const dispatch = useDispatch();
   const reset = ["R", "E", "S", "E", "T"];
@@ -20,6 +22,12 @@ function ResetPassword() {
     const info = { newPassword, confirmPassword };
     dispatch(passwordReset(token, info));
   };
+
+  useEffect(() => {
+    if (updatedPassword) {
+      navigate("/login");
+    }
+  }, [updatedPassword, navigate]);
   return (
     <div
       className="resetPasswordContainer"

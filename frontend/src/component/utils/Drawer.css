@@ -25,7 +25,7 @@
   background-color: snow;
   transition: all 0.3s ease-in-out;
   position: relative;
-  outline: 8px solid rgb(239 239 239);
+  /* outline: 8px solid rgb(255, 255, 255); */
   border-radius: 8px;
   padding: 15px;
   padding-right: 25px;
@@ -33,14 +33,14 @@
 }
 .drawerBox.add {
   transform: translateX(-17%);
-  transition: all 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out;
 }
 
 .searchFollow {
   height: 40px;
   width: 80%;
   border-radius: 50px;
-  border: 1px solid rgba(254, 101, 74, 0.553);
+  border: 1px solid rgba(0, 0, 0, 0.195);
   background-color: white;
   overflow: hidden;
   position: relative;
@@ -52,7 +52,7 @@
   border: none;
   outline: none;
   font-size: 0.9rem;
-  background-color: white;
+  background-color: transparent;
   padding: 5px;
   padding-left: 35px !important;
   color: rgb(45, 45, 45);
@@ -80,4 +80,27 @@
   border-radius: 6px;
   margin: 5px;
   cursor: pointer;
+}
+.darkMode .crossDrawer > svg {
+  background-color: black;
+}
+
+@media screen and (max-width: 768px) {
+  .customDrawerContainer {
+    position: fixed;
+    width: 0%;
+  }
+  .customDrawerContainer.add {
+    width: 100%;
+    transition: none;
+  }
+
+  .drawerBox {
+    height: 100%;
+    width: 95%;
+  }
+  .drawerBox.add {
+    transform: translateX(0%);
+    transition: transform 0.5s ease-in-out;
+  }
 }

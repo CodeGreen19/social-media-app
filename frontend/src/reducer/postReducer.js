@@ -1,6 +1,7 @@
 import { createReducer } from "@reduxjs/toolkit";
 const initialState = {};
 
+// all the post based reducers here !
 export const postReducer = createReducer(initialState, {
   CreatePostRequest: (state) => {
     state.loading = true;
@@ -10,6 +11,28 @@ export const postReducer = createReducer(initialState, {
     state.message = action.payload;
   },
   CreatePostFailure: (state, action) => {
+    state.loading = false;
+    state.error = action.payload;
+  },
+  EditCaptionRequest: (state) => {
+    state.loading = true;
+  },
+  EditCaptionSuccess: (state, action) => {
+    state.loading = false;
+    state.message = action.payload;
+  },
+  EditCaptionFailure: (state, action) => {
+    state.loading = false;
+    state.error = action.payload;
+  },
+  ReportRequest: (state) => {
+    state.loading = true;
+  },
+  ReportSuccess: (state, action) => {
+    state.loading = false;
+    state.message = action.payload;
+  },
+  ReportFailure: (state, action) => {
     state.loading = false;
     state.error = action.payload;
   },
@@ -35,14 +58,13 @@ export const postReducer = createReducer(initialState, {
     state.loading = false;
     state.error = action.payload;
   },
-  NewCommentRequest: (state) => {
+  ReactCommentRequest: (state) => {
     state.loading = true;
   },
-  NewCommentSuccess: (state, action) => {
+  ReactCommentSuccess: (state, action) => {
     state.loading = false;
-    state.message = action.payload;
   },
-  NewCommentFailure: (state, action) => {
+  ReactCommentFailure: (state, action) => {
     state.loading = false;
     state.error = action.payload;
   },
@@ -55,6 +77,37 @@ export const postReducer = createReducer(initialState, {
   ReplyCommentFailure: (state) => {
     state.loading = false;
   },
+  ReplyReactRequest: (state) => {
+    state.loading = true;
+  },
+  ReplyReactSuccess: (state) => {
+    state.loading = false;
+  },
+  ReplyReactFailure: (state) => {
+    state.loading = false;
+  },
+  ReplyOfRepliedRequest: (state) => {
+    state.loading = true;
+  },
+  ReplyOfRepliedSuccess: (state, action) => {
+    state.loading = false;
+    state.message = action.payload.message;
+  },
+  ReplyOfRepliedFailure: (state, action) => {
+    state.loading = false;
+    state.message = action.payload;
+  },
+  DeleteReplyRequest: (state) => {
+    state.loading = true;
+  },
+  DeleteReplySuccess: (state, action) => {
+    state.loading = false;
+    state.message = action.payload.message;
+  },
+  DeleteReplyFailure: (state, action) => {
+    state.loading = false;
+    state.message = action.payload;
+  },
   AllReplyRequest: (state) => {
     state.loading = true;
   },
@@ -66,6 +119,21 @@ export const postReducer = createReducer(initialState, {
     state.loading = false;
     state.message = action.payload;
   },
+  UploadVideoRequest: (state) => {
+    state.loading = false;
+  },
+  UploadVideoSuccess: (state, action) => {
+    state.loading = false;
+    state.message = action.payload.message;
+  },
+  UploadVideoFailure: (state, action) => {
+    state.loading = false;
+    state.message = action.payload;
+  },
+  myPostsTrue: (state, action) => {
+    state.showMyPost = action.payload;
+  },
+
   clearErrors: (state) => {
     state.error = null;
   },
@@ -89,7 +157,31 @@ export const LikeReducer = createReducer(initialState, {
     state.message = null;
   },
 });
+
+// comment reducer inside the post reducer
 export const commentReducer = createReducer(initialState, {
+  NewCommentRequest: (state) => {
+    state.loading = true;
+  },
+  NewCommentSuccess: (state, action) => {
+    state.loading = false;
+    state.message = action.payload;
+  },
+  NewCommentFailure: (state, action) => {
+    state.loading = false;
+    state.error = action.payload;
+  },
+  DeleteCommentRequest: (state) => {
+    state.loading = true;
+  },
+  DeleteCommentSuccess: (state, action) => {
+    state.loading = false;
+    state.message = action.payload;
+  },
+  DeleteCommentFailure: (state, action) => {
+    state.loading = false;
+    state.error = action.payload;
+  },
   AllCommentsRequest: (state) => {
     state.loading = true;
   },

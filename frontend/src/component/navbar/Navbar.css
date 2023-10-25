@@ -16,8 +16,8 @@
   height: 60px;
   border-radius: 8px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   padding: 10px;
 }
 .navbar > div {
@@ -26,9 +26,25 @@
   align-content: center !important;
   align-items: center;
 }
-.navbar > div > svg {
-  color: var(--main);
+.navbar .menuIcons > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  margin-right: 15px;
+  margin: 0 9px;
+  padding: 3px 6px;
+  color: rgb(45, 45, 45);
+  letter-spacing: 0.3px;
+  font-family: "AR One Sans", sans-serif;
+  background: white;
+  border-radius: 10px;
+  border: 1px solid #ededed;
+}
+.navbar .menuIcons > span > svg {
   font-size: 1.3rem;
+  margin: 5px;
+  color: var(--main);
 }
 
 .logo {
@@ -36,7 +52,20 @@
   display: flex;
   align-items: center;
   font-family: "AR One Sans", sans-serif;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
+  /* margin-left: 10px; */
+  cursor: pointer;
+}
+.logo > .boxStyledText {
+  margin-bottom: 0;
+  margin-right: 0;
+  margin-top: 0;
+}
+.logo > .boxStyledText li {
+  border: 1px solid #6969697a;
+  border-radius: 5px;
+  font-weight: bold;
+  padding: 4px 14px;
 }
 .logo div {
   color: rgb(0, 138, 39);
@@ -48,17 +77,30 @@
 }
 .searchBox {
   position: relative;
+  width: 280px;
 }
 .searchBox > input {
+  width: 93%;
   padding: 10px;
   padding-right: 35px;
   padding-left: 15px;
   border-radius: 50px;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   outline: none;
-  border: 1px solid rgb(255, 206, 123);
+  border: 1px solid rgb(0 0 0 / 23%);
   margin: 10px;
-  color: rgb(74, 74, 74);
+  color: rgb(45, 45, 45);
+  letter-spacing: 0.3px;
+  font-family: "AR One Sans", sans-serif;
+}
+.navbarContainer.darkMode .searchBox > input {
+  background-color: rgb(26, 25, 25);
+}
+.navbarContainer.darkMode .searchBox > input::placeholder {
+  color: rgb(220, 220, 220);
+}
+.navbarContainer.darkMode .searchBox > svg {
+  color: rgb(220, 220, 220);
 }
 .searchBox > svg {
   position: absolute;
@@ -72,6 +114,14 @@
   font-size: 1.2rem;
   margin: 10px;
 }
+.navbarContainer.darkMode .menuIcons > span {
+  background-color: rgb(25, 25, 25);
+  border: none;
+  color: white;
+}
+.navbarContainer.darkMode .menuIcons > span > svg {
+  color: white;
+}
 
 /* for mobile responsive */
 
@@ -84,28 +134,65 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px;
+  background-color: white;
 }
-
-.mobileNavbar > svg {
+.mobileNavbar > .options {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+}
+.mobileNavbar > .options > svg {
   color: var(--main);
   font-size: 1.3rem;
+  height: 40px;
+  width: 40px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 6px;
+  border: 1px solid #92929270;
 }
 
 .mobileProfile {
-  height: 35px;
-  width: 35px;
+  height: 40px;
+  width: 40px;
   border-radius: 6px;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid #292929b0;
 }
 .mobileProfile > img {
+  width: 100%;
+}
+
+.myProfile {
+  height: 38px;
+  width: 38px;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 0 10px;
+  border: 1px solid rgba(88, 88, 88, 0.445);
+  cursor: pointer;
+}
+.myProfile > img {
   width: 100%;
 }
 
 @media screen and (max-width: 768px) {
   .mobileNavbar {
     width: 100% !important;
+    padding: 0;
+    margin-left: 3px;
+    margin-right: 3.5px;
+  }
+  .logo {
+    margin-left: 5px;
+    margin-left: 0px;
+  }
+  .navbarContainer {
+    height: 72px;
+    background-color: white;
   }
 }

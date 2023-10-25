@@ -1,5 +1,6 @@
 const nodeMailer = require("nodemailer");
 
+// send  a fake main on mailtrapper
 exports.sendEmail = async (options) => {
   const transporter = nodeMailer.createTransport({
     host: "sandbox.smtp.mailtrap.io",

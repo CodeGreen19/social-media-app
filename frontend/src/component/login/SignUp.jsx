@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Signup.css";
 import BoxText from "../utils/BoxText";
 import { Light, LightBg } from "../utils/ThemeColor";
@@ -10,8 +10,9 @@ import ImageRoundedIcon from "@mui/icons-material/ImageRounded";
 import { useNavigate } from "react-router-dom";
 
 import { registerUser } from "../../action/userAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 function SignUp() {
+  const { isAuthenticated } = useSelector((state) => state.user);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -50,7 +51,11 @@ function SignUp() {
     };
     dispatch(registerUser(userInfo));
   };
-
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, [isAuthenticated, navigate]);
   return (
     <div className="signupContainer" style={{ backgroundColor: LightBg }}>
       <form className="signupBox" style={{ backgroundColor: Light }}>
@@ -90,7 +95,13 @@ function SignUp() {
             <img src={selectedImage} alt="profilePreview" />
           </div>
         )}
-        <span className="addProfie"> add profile </span>
+        {selectedImage ? (
+          <span className="addProfie" style={{ color: "rgb(33, 30, 30)" }}>
+            profile added
+          </span>
+        ) : (
+          <span className="addProfie">add profile</span>
+        )}
 
         <CoPresentIcon className="coPresentIcon" />
         <EmailIcon className="mailSvg" />

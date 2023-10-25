@@ -3,11 +3,14 @@ const { uploadImage, deleteImage } = require("../middleweres/uploadImg");
 const { sendError } = require("../utils/sendError");
 const { sendEmail } = require("../middleweres/sendMail");
 const crypto = require("crypto");
-// register user
+
+// to register a new user
 exports.registerUser = async (req, res) => {
   const { name, email, password, confirmPassword, selectedImage } = req.body;
 
   // before authentication to register a new user
+  if (!email.includes("@"))
+    return sendError(res, 400, "please send a valid email address");
   if (!name || !email || !password || !confirmPassword)
     return sendError(res, 400, "please fill all the fields!");
   if (password !== confirmPassword)
@@ -81,12 +84,11 @@ exports.loginUser = async (req, res) => {
     }
 
     const token = await user.generateToken();
-
     const options = {
       expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
       httpOnly: true,
     };
-
+    // save the token in the cookie store
     res.status(201).cookie("token", token, options).json({
       message: "login successfully",
       success: true,
@@ -160,7 +162,7 @@ exports.updateProfile = async (req, res) => {
     }
 
     //chect if the user change the profie image.
-    // if change the image it will remove the old image and by the new image
+    // if change the image it will remove the old image by a new image
 
     if (profileImg !== user.avatar.url) {
       await deleteImage(user.avatar.public_id);
@@ -280,6 +282,38 @@ exports.resetPassword = async (req, res) => {
     res.status(200).json({
       success: true,
       message: "Password Updated",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+// select a new user to show allover the website
+exports.selectedUser = async (req, res) => {
+  const { id } = req.body;
+  try {
+    const user = await User.findById(req.user._id);
+    const selectedUser = await User.findById(id).populate(
+      "followers following"
+    );
+    let relation = "follow";
+    for (let index = 0; index < user.followers.length; index++) {
+      if (user.followers[index].toString() === id) {
+        relation = "followers";
+      }
+    }
+    for (let index = 0; index < user.following.length; index++) {
+      if (user.following[index].toString() === id) {
+        relation = "following";
+      }
+    }
+
+    res.status(200).json({
+      success: true,
+      selectedUser,
+      relation,
     });
   } catch (error) {
     res.status(500).json({

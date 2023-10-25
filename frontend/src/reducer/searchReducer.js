@@ -7,7 +7,8 @@ export const searchReducer = createReducer(initialState, {
   },
   SearchUsersSuccess: (state, action) => {
     state.loading = false;
-    state.searchedUsers = action.payload.users;
+    state.followimgUsers = action.payload.followimgUsers;
+    state.followUsers = action.payload.followUsers;
   },
   SearchUsersFailure: (state, action) => {
     state.loading = false;
