@@ -168,7 +168,11 @@ export default function CreatePost({ open, setOpen }) {
           onChange={(e) => setCaption(e.target.value)}
         ></textarea>
         {uploadVideo ? (
-          <button className="postButton" onClick={postVideoHandler}>
+          <button
+            className="postButton"
+            onClick={postVideoHandler}
+            disabled={uploadProgress > 0 ? true : false}
+          >
             {uploadProgress > 0 ? `${uploadProgress} %` : "POST"}
           </button>
         ) : (

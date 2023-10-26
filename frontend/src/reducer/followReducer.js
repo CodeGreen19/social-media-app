@@ -58,6 +58,17 @@ export const followReducer = createReducer(initialState, {
     state.loading = false;
     state.error = action.payload;
   },
+  SuggessionRequest: (state) => {
+    state.loading = true;
+  },
+  SuggessionSuccess: (state, action) => {
+    state.loading = false;
+    state.newPosts = action.payload;
+  },
+  SuggessionFailure: (state, action) => {
+    state.loading = false;
+    state.error = action.payload;
+  },
   clearErrors: (state) => {
     state.error = null;
   },

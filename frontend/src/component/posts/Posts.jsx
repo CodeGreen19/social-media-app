@@ -44,6 +44,13 @@ function Posts() {
     backgroundColor: darkMode ? Dark : Light,
     color: darkMode ? ForDarkText : ForLightText,
   };
+  /// some styling array
+
+  const followarray = ["F", "O", "L", "L", "O", "W"];
+  const someOne = ["S", "O", "M", "E", "O", "N", "E"];
+  const to = ["T", "O"];
+  const get = ["G", "E", "T"];
+  const postsarray = ["P", "O", "S", "T", "S"];
   const toggleLove = (postId) => {
     dispatch(likeAndUnlikePost(postId)).then(() => {
       if (selectedUser !== undefined && selectedUser._id !== user._id) {
@@ -54,6 +61,7 @@ function Posts() {
       }
     });
   };
+
   // delete posthandler
   const deletePostHandler = (post) => {
     dispatch(deletePost(post._id)).then(() => {
@@ -120,6 +128,9 @@ function Posts() {
       setPosts(followingPosts);
     }
   }, [showMyPost, followingPosts, myPosts]);
+
+  // if the user have no folloing so he/she get these newest posts
+
   return (
     <Fragment>
       {user && (
@@ -128,7 +139,7 @@ function Posts() {
           style={Option}
         >
           {showMyPost &&
-            (posts.length === 0 ? (
+            (posts && posts.length === 0 ? (
               <div style={{ marginLeft: "20px" }}>
                 <BoxText text={["H", "E"]} />
                 <BoxText text={["H", "A", "S"]} />
@@ -139,15 +150,33 @@ function Posts() {
               <div
                 style={{
                   display: "flex",
-                  alignItems: "center",
-                  justifyContent: "flex-start",
+                  alignItems: "flex-start",
+                  justifyContent: "center",
                   marginLeft: "20px",
                 }}
+                className="myPostText"
               >
                 <BoxText text={["M", "Y"]} />
                 <BoxText text={["P", "O", "S", "T", "S"]} />
               </div>
             ))}
+          {posts && posts.length === 0 && (
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "flex-start",
+                padding: "20px",
+              }}
+            >
+              <BoxText text={followarray} />
+              <BoxText text={someOne} />
+              <BoxText text={to} />
+              <BoxText text={get} />
+              <BoxText text={postsarray} />
+            </div>
+          )}
           {posts &&
             posts.map(
               (post) =>

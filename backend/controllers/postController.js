@@ -1,7 +1,6 @@
 const User = require("../models/userModels");
 const Post = require("../models/postModel");
 const { uploadImage, deleteImage } = require("../middleweres/uploadImg");
-const shuffleArray = require("../middleweres/suffle");
 
 /// create a new post
 exports.createPost = async (req, res) => {

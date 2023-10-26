@@ -119,3 +119,23 @@ export const getFollowingPosts = () => async (dispatch) => {
     });
   }
 };
+// to get suggession posts
+export const someSuggessionPosts = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: "SuggessionRequest",
+    });
+
+    const { data } = await axios.get(`/api/user/newsuggested`, config);
+
+    dispatch({
+      type: "SuggessionSuccess",
+      payload: data.somePosts,
+    });
+  } catch (error) {
+    dispatch({
+      type: "SuggessionFailure",
+      payload: error.response.data.message,
+    });
+  }
+};

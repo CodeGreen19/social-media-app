@@ -132,7 +132,7 @@ function Navbar() {
                 hareSpace
               </h2>
               <div className="options">
-                <SearchIcon />
+                <SearchIcon onClick={() => setSearchClicked(!searchClicked)} />
                 {darkMode ? (
                   <WbSunnyOutlinedIcon onClick={toggleDarkMode} />
                 ) : (
@@ -143,6 +143,14 @@ function Navbar() {
                   <img src={user.avatar.url} alt="userProfile" />
                 </div>
               </div>
+              {/* search modal  */}
+
+              <UserSearch
+                open={searchClicked}
+                setOpen={setSearchClicked}
+                handleChangeInput={handleChangeInput}
+                searchText={searchText}
+              />
             </div>
           ) : (
             <div className="navbar" style={Option}>

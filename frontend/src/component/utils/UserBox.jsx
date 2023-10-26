@@ -10,12 +10,15 @@ import {
 } from "../../action/followAction";
 import { searchUsersAction } from "../../action/searchAction";
 import { getMyPosts } from "../../action/postAction";
+import { useNavigate } from "react-router-dom";
 
 function UserBox({ info, category }) {
+  const navigate = useNavigate();
   const {
     user: mainUser,
     selectUser: selectedUser,
     darkMode,
+    mobile,
   } = useSelector((state) => state.user);
   const [unfollowBox, setUnfollowBox] = useState(false);
   const [removeFollowers, setRemoveFollowers] = useState(false);
@@ -71,6 +74,9 @@ function UserBox({ info, category }) {
         dispatch({ type: "myPostsTrue", payload: true });
       });
     });
+    if (mobile) {
+      navigate("/profile");
+    }
   };
 
   // confirm remove followers

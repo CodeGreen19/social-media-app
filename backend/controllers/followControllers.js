@@ -1,6 +1,6 @@
 const User = require("../models/userModels");
 const Post = require("../models/postModel");
-const shuffleArray = require("../middleweres/suffle");
+// const shuffleArray = require("../middleweres/suffle");
 
 // to follow and unfollow
 exports.FollowAndUnfollow = async (req, res) => {
@@ -55,6 +55,25 @@ exports.myFollowing = async (req, res) => {
       success: true,
       followers,
       following,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+// my followers
+exports.newSuggestedPost = async (req, res) => {
+  try {
+    const posts = await Post.find().populate("owner comments.user");
+    let somePosts = [];
+    for (let index = 0; index < 5; index++) {
+      somePosts.push(posts[index]);
+    }
+    res.status(200).json({
+      success: true,
+      somePosts,
     });
   } catch (error) {
     res.status(500).json({
@@ -135,7 +154,7 @@ exports.getPostOfFollowing = async (req, res) => {
         $in: user.following,
       },
     }).populate("owner comments.user");
-    shuffleArray(posts);
+    // shuffleArray(posts);
 
     res.status(200).json({
       success: true,

@@ -6,7 +6,7 @@
 .postsBox {
   width: 100%;
   border-radius: 8px;
-  margin-bottom: 12px;
+  padding-bottom: 12px;
   position: relative;
   padding: 20px;
 }
@@ -82,7 +82,7 @@
   border: 1px solid rgb(221, 221, 221);
 }
 .postsContainer.darkMode .feedBackBox > span {
-  background-color: #222222;
+  background-color: #151515;
   border: none;
 }
 .postsContainer.darkMode .feedBackBox > span > svg {
@@ -196,7 +196,7 @@
   .postsBox {
     width: 100%;
     border-radius: 0px;
-    margin-bottom: 12px;
+    margin-bottom: unset;
     position: relative;
     padding: 0px;
   }
@@ -212,9 +212,17 @@
     padding: 6px 10px;
     border: 1px solid #e3e3e3;
     border-radius: 6px;
+    font-size: 0.8rem;
+  }
+  .darkMode .postedUserName {
+    border: none;
+    background-color: rgb(17, 17, 17);
   }
   .feedBackBox {
     width: 96%;
     margin: auto;
+  }
+  .myPostText {
+    display: none !important;
   }
 }

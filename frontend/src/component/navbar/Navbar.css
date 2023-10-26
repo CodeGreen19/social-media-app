@@ -153,6 +153,10 @@
   border: 1px solid #92929270;
 }
 
+.darkMode .options > svg {
+  color: white;
+  background-color: rgb(30, 30, 30);
+}
 .mobileProfile {
   height: 40px;
   width: 40px;

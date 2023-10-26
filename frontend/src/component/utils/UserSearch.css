@@ -14,13 +14,19 @@
   transition: unset;
 }
 
+.darkMode .searchShowBox {
+  background-color: rgb(26, 26, 26);
+  border-radius: 0;
+  outline: black;
+}
+
 .searchShowBox {
   width: 65%;
   height: 70%;
   background-color: snow;
   border-radius: 7px;
   transform: translateY(-100%);
-  transition: all 0.3s;
+  transition: transform 0.3s;
   position: relative;
   margin-left: 28%;
   margin-right: 1%;
@@ -43,4 +49,69 @@
   font-size: 1.3rem;
   z-index: 1;
   cursor: pointer;
+}
+.mobileSearchBox {
+  height: 40px;
+  width: 80%;
+  border-radius: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.195);
+  background-color: white;
+  overflow: hidden;
+  position: relative;
+  margin: 15px 0;
+}
+
+.mobileSearchInput {
+  height: 100%;
+  width: 95%;
+  border: none;
+  outline: none;
+  font-size: 0.9rem;
+  background-color: transparent;
+  padding: 5px;
+  padding-left: 35px !important;
+  color: rgb(45, 45, 45);
+  letter-spacing: 0.3px;
+  font-family: "AR One Sans", sans-serif;
+}
+.darkMode .mobileSearchBox {
+  background-color: #323232;
+  color: white;
+}
+.darkMode .mobileSearchInput {
+  color: white;
+}
+.darkMode .name {
+  color: white;
+}
+.mobileSearchBox > svg {
+  position: absolute;
+  left: 7px;
+  top: 8px;
+  color: tomato;
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 1200px) {
+  .userSearchContainer.add {
+    width: 80%;
+    top: 65px;
+    transition: unset;
+    background-color: transparent;
+  }
+  .searchShowBox {
+    width: 100%;
+    margin-left: 0;
+    height: 70%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .userSearchContainer.add {
+    width: 100%;
+    transition: unset;
+  }
+  .searchShowBox {
+    width: 100%;
+    height: 70%;
+  }
 }

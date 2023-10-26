@@ -7,11 +7,12 @@ import Navbar from "../navbar/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { getMyPosts } from "../../action/postAction";
 import { useNavigate } from "react-router-dom";
+import { DarkBg } from "../utils/ThemeColor";
 
 function MobileProfile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user, mobile } = useSelector((state) => state.user);
+  const { user, mobile, darkMode } = useSelector((state) => state.user);
 
   useEffect(() => {
     if (user) {
@@ -28,7 +29,10 @@ function MobileProfile() {
   return (
     <Fragment>
       <Navbar />
-      <div className="mobileProfilePage">
+      <div
+        className="mobileProfilePage"
+        style={{ backgroundColor: darkMode && DarkBg }}
+      >
         <UserProfile />
         <Posts />
       </div>
