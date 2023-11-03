@@ -16,7 +16,7 @@
 
 .darkMode .searchShowBox {
   background-color: rgb(26, 26, 26);
-  border-radius: 0;
+  border-radius: 7px;
   outline: black;
 }
 

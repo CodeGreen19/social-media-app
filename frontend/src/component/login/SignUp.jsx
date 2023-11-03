@@ -109,12 +109,12 @@ function SignUp() {
         <PinIcon className="pinIcon" />
         <ImageRoundedIcon className="imageRoundedIcon" />
         <button onClick={handleSubmit} type="submit">
-          REGISTER
+          Register
         </button>
         <div style={{ fontSize: "0.7rem" }}>
           Already Have an Account ?
           <span className="createAccount" onClick={() => navigate("/login")}>
-            Login
+            sign in
           </span>{" "}
         </div>
       </form>

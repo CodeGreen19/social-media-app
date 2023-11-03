@@ -59,7 +59,7 @@ function Login() {
         >
           Forgot Password ?
         </span>
-        <button onClick={handleSubmit}>LOGIN</button>
+        <button onClick={handleSubmit}>Sing In</button>
         <div style={{ fontSize: "0.7rem" }}>
           Don't hava a account ?
           <span

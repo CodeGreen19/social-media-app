@@ -51,7 +51,7 @@ function ResetPassword() {
         <LockOpenIcon className="lockSvg1" />
         <LockIcon className="lockSvg2" />
         <button type="submit" onClick={handleSubmit}>
-          UPDATE
+          Update
         </button>
       </form>
     </div>

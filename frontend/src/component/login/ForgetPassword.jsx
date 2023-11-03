@@ -48,7 +48,7 @@ function ForgetPassword() {
 
           <EmailIcon className="login-mailSvg" />
           <button type="submit" onClick={handleSubmit}>
-            SEND MAIL
+            Send Mail
           </button>
         </form>
       )}

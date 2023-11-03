@@ -50,6 +50,7 @@
   transition: all 0.3s ease-in-out;
   border: 1px solid var(--signature-color);
   background-color: white;
+  letter-spacing: 1px;
 }
 .signupBox > button:hover {
   background-color: var(--signature-color);
