@@ -23,6 +23,14 @@ function Login() {
     e.preventDefault();
     dispatch(loginUser(email, password));
   };
+  // handle guest user
+
+  const handleGuestUser = async (e) => {
+    e.preventDefault();
+    setEmail("veronica@gmail.com");
+    setPassword("veronica123");
+  };
+
   useEffect(() => {
     if (isAuthenticated) {
       navigate("/");
@@ -60,6 +68,9 @@ function Login() {
           Forgot Password ?
         </span>
         <button onClick={handleSubmit}>Sing In</button>
+        <div className="guestLoginBox">
+          <button onClick={handleGuestUser}>Guest User Credentials</button>
+        </div>
         <div style={{ fontSize: "0.7rem" }}>
           Don't hava a account ?
           <span

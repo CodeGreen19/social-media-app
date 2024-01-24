@@ -79,3 +79,22 @@
   font-size: 20px !important;
   color: var(--signature-color);
 }
+
+/* guest login  */
+
+.guestLoginBox button {
+  background-color: rgb(249, 249, 249);
+  color: rgb(0, 0, 0);
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+  border: 1px solid rgb(76, 76, 76);
+  transition: all 0.3s;
+}
+.guestLoginBox button:hover {
+  background-color: rgb(25, 25, 25);
+  color: white;
+  cursor: pointer;
+}
